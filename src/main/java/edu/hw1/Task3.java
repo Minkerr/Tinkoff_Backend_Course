@@ -5,6 +5,9 @@ final class Task3 {
     }
 
     public static boolean isNestable(int[] a, int[] b) {
+        if (a == null || b == null || a.length == 0 || b.length == 0) {
+            return false;
+        }
         int mx1 = a[0];
         int mn1 = a[0];
         int mx2 = b[0];

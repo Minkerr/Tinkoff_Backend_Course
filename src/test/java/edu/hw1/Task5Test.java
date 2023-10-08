@@ -6,27 +6,44 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Task5Test {
     @Test
-    void test1(){
-        assertTrue(Task5.isPalindromeDescendant(11211230));
+    void isPalindromeDescendant_shouldReturnTrueForNum11211230(){
+        int num = 11211230; //11211230 -> 2333 -> 56 -> 11
+        boolean res = Task5.isPalindromeDescendant(num);
+        assertTrue(res);
     }
 
     @Test
-    void test2(){
-        assertTrue(Task5.isPalindromeDescendant(13001120));
+    void isPalindromeDescendant_shouldReturnTrueForNum13001120(){
+        int num = 13001120; //13001120 -> 4022 -> 44
+        boolean res = Task5.isPalindromeDescendant(num);
+        assertTrue(res);
     }
 
     @Test
-    void test3(){
-        assertTrue(Task5.isPalindromeDescendant(23336014));
+    void isPalindromeDescendant_shouldReturnTrueForNum23336014(){
+        int num = 23336014; //23336014 -> 5665
+        boolean res = Task5.isPalindromeDescendant(num);
+        assertTrue(res);
     }
 
     @Test
-    void test4(){
-        assertTrue(Task5.isPalindromeDescendant(11));
+    void isPalindromeDescendant_shouldReturnTrueForEleven(){
+        int num = 11;
+        boolean res = Task5.isPalindromeDescendant(num);
+        assertTrue(res);
     }
 
     @Test
-    void test5(){
-        assertFalse(Task5.isPalindromeDescendant(145));
+    void isPalindromeDescendant_shouldReturnFalseForOddLengthNumber(){
+        int num = 145;  //odd number of digits
+        boolean res = Task5.isPalindromeDescendant(num);
+        assertFalse(res);
+    }
+
+    @Test
+    void isPalindromeDescendant_shouldReturnFalseForDigit(){
+        int num = 1;  //odd number of digits
+        boolean res = Task5.isPalindromeDescendant(num);
+        assertFalse(res);
     }
 }
