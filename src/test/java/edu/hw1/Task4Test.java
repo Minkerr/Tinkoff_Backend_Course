@@ -6,22 +6,34 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class Task4Test {
     @Test
     void fixString_shouldFixStringWithNumber(){
+        //arrange
         String exp = "214365";
-        String res = Task4.fixString("123456");
-        assertEquals(exp, res);
+        String stringWithNumber = "123456";
+        //act
+        String act = Task4.fixString(stringWithNumber);
+        //assert
+        assertEquals(exp, act);
     }
 
     @Test
     void fixString_shouldFixStringWithCharactersAndOddLength(){
+        //arrange
         String exp = "abcde";
-        String res = Task4.fixString("badce");
-        assertEquals(exp, res);
+        String stringWithCharactersAndOddLength = "badce";
+        //act
+        String act = Task4.fixString(stringWithCharactersAndOddLength);
+        //assert
+        assertEquals(exp, act);
     }
 
     @Test
     void fixString_shouldFixStringWithSentence(){
+        //arrange
         String exp = "This is a mixed up string.";
-        String res = Task4.fixString("hTsii  s aimex dpus rtni.g");
-        assertEquals(exp, res);
+        String stringWithSentence = "hTsii  s aimex dpus rtni.g";
+        //act
+        String act = Task4.fixString(stringWithSentence);
+        //assert
+        assertEquals(exp, act);
     }
 }

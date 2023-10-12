@@ -6,37 +6,57 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class Task7Test {
     @Test
     void rotateRight_shouldRotateEightToFourWithShiftEqualsOne() {
+        //arrange
         int exp = 4;
-        int res = Task7.rotateRight(8, 1);
-        assertEquals(exp, res);
+        int eight = 8;
+        //act
+        int act = Task7.rotateRight(eight, 1);
+        //assert
+        assertEquals(exp, act);
     }
 
     @Test
     void rotateLeft_shouldRotateSixteenToOneWithShiftEqualsOne() {
+        //arrange
         int exp = 1;
-        int res = Task7.rotateLeft(16, 1);
-        assertEquals(exp, res);
+        int sixteen = 16;
+        //act
+        int act = Task7.rotateLeft(sixteen, 1);
+        //assert
+        assertEquals(exp, act);
     }
 
     @Test
     void rotateLeft_shouldRotateSeventeenToSixWithShiftEqualsTwo() {
+        //arrange
         int exp = 6;
-        int res = Task7.rotateLeft(17, 2);
-        assertEquals(exp, res);
+        int seventeen = 17;
+        //act
+        int act = Task7.rotateLeft(seventeen, 2);
+        //assert
+        assertEquals(exp, act);
     }
 
     @Test
     void rotateRight_shouldRotateFifteenToItselfWithAnyShift() {
+        //arrange
         int exp = 15;
-        int res = Task7.rotateRight(15, 3);
-        assertEquals(exp, res);
+        int fifteen = 15;
+        //act
+        int act = Task7.rotateRight(fifteen, 3);
+        //assert
+        assertEquals(exp, act);
     }
 
     @Test
     void rotateRight_shouldRotateTenToTenWithShiftEqualsFullCycleLength() {
+        //arrange
         int exp = 10;
-        int res = Task7.rotateRight(10, 4);
-        assertEquals(exp, res);
+        int ten = 10;
+        //act
+        int act = Task7.rotateRight(ten, 4);
+        //assert
+        assertEquals(exp, act);
     }
 
 }

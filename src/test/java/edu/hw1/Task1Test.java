@@ -6,50 +6,78 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class Task1Test {
     @Test
     void minutesToSeconds_shouldConvertIfTimeIsOneMinute() {
+        //arrange
         int expected = 60;
-        int given = Task1.minutesToSeconds("01:00");
-        assertThat(given).isEqualTo(expected);
+        String OneMinute = "01:00";
+        //act
+        int act = Task1.minutesToSeconds(OneMinute);
+        //assert
+        assertThat(act).isEqualTo(expected);
     }
 
     @Test
     void minutesToSeconds_shouldReturnErrorBecauseOfSixteenSeconds() {
+        //arrange
         int expected = -1;
-        int given = Task1.minutesToSeconds("10:60");
-        assertThat(given).isEqualTo(expected);
+        String SixtySeconds = "10:60";
+        //act
+        int act = Task1.minutesToSeconds(SixtySeconds);
+        //assert
+        assertThat(act).isEqualTo(expected);
     }
 
     @Test
     void minutesToSeconds_shouldConvertSimpleTest() {
+        //arrange
         int expected = 836;
-        int given = Task1.minutesToSeconds("13:56");
-        assertThat(given).isEqualTo(expected);
+        String SimpleTest = "13:56";
+        //act
+        int act = Task1.minutesToSeconds(SimpleTest);
+        //assert
+        assertThat(act).isEqualTo(expected);
     }
 
     @Test
     void minutesToSeconds_shouldConvertIfThereAreALotOfMinutes() {
+        //arrange
         int expected = 59999;
-        int given = Task1.minutesToSeconds("999:59");
-        assertThat(given).isEqualTo(expected);
+        String ALotOfMinutes = "999:59";
+        //act
+        int act = Task1.minutesToSeconds(ALotOfMinutes);
+        //assert
+        assertThat(act).isEqualTo(expected);
     }
 
     @Test
     void minutesToSeconds_shouldNotConvertEmptyString() {
+        //arrange
         int expected = -1;
-        int given = Task1.minutesToSeconds("");
-        assertThat(given).isEqualTo(expected);
+        String EmptyString = "";
+        //act
+        int act = Task1.minutesToSeconds(EmptyString);
+        //assert
+        assertThat(act).isEqualTo(expected);
     }
 
     @Test
     void minutesToSeconds_shouldNotConvertStringWithCharacter() {
+        //arrange
         int expected = -1;
-        int given = Task1.minutesToSeconds("123a:12");
-        assertThat(given).isEqualTo(expected);
+        String stringWithCharacter = "123a:12";
+        //act
+        int act = Task1.minutesToSeconds(stringWithCharacter);
+        //assert
+        assertThat(act).isEqualTo(expected);
     }
 
     @Test
     void minutesToSeconds_shouldNotConvertStringWithoutMinutes() {
+        //arrange
         int expected = -1;
-        int given = Task1.minutesToSeconds("234");
-        assertThat(given).isEqualTo(expected);
+        String stringWithoutMinutes = "234";
+        //act
+        int act = Task1.minutesToSeconds(stringWithoutMinutes);
+        //assert
+        assertThat(act).isEqualTo(expected);
     }
 }
