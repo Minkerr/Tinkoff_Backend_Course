@@ -10,7 +10,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class Task3Test {
+public class PopularCommandExecutorTest {
     @Test
     void updatePackages_shouldCreateAndCloseConnections() throws Exception {
         //arrange

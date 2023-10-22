@@ -4,9 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public final class PopularCommandExecutor {
+    private static final Logger LOGGER = LogManager.getLogger();
     private final ConnectionManager manager;
     private final int maxAttempts;
-    Logger logger = LogManager.getLogger();
 
     public PopularCommandExecutor() {
         maxAttempts = 1;
@@ -25,14 +25,11 @@ public final class PopularCommandExecutor {
     void tryExecute(String command) throws Exception {
         Exception exception = null;
         for (int i = 0; i < maxAttempts; i++) {
-            Connection connection = manager.getConnection();
-            try {
+            try (Connection connection = manager.getConnection();) {
                 connection.execute(command);
             } catch (Exception e) {
                 exception = e;
-                logger.info("Error");
-            } finally {
-                connection.close();
+                LOGGER.error("Error. ConnectionException.");
             }
         }
         if (exception != null) {

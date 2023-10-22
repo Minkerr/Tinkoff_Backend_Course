@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
-public class Task1Test {
+public class ExprTest {
     final double ACCURACY = 0.0001;
 
     @Test

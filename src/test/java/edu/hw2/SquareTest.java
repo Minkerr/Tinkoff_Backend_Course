@@ -5,7 +5,7 @@ import edu.hw2.Task2.Square;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class Task2Test {
+public class SquareTest {
 
     @Test
     void setWidthFromSquare_shouldReturnRectangleWithEqualSides() {

@@ -4,7 +4,7 @@ import edu.hw2.Task4.CallingInfo;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class Task4Test {
+public class CallingInfoTest {
     @Test
     void callingInfo_shouldNameWhoHasCalledFunction() {
         //arrange
