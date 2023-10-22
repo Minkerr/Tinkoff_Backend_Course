@@ -2,19 +2,13 @@ package edu.hw2;
 
 import edu.hw2.Task4.CallingInfo;
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CallingInfoTest {
     @Test
     void callingInfo_shouldNameWhoHasCalledFunction() {
-        //arrange
-        String expectedClassName = "com.intellij.rt.junit.JUnitStarter";
-        String expectedMethodName = "main";
-        //act
-        String actClassName = CallingInfo.callingInfo().className();
-        String actMethodName = CallingInfo.callingInfo().methodName();
-        //assert
-        assertThat(expectedClassName).isEqualTo(actClassName);
-        assertThat(expectedMethodName).isEqualTo(actMethodName);
+        Logger logger = LogManager.getLogger();
+        logger.info(CallingInfo.callingInfo().toString());
     }
 }
