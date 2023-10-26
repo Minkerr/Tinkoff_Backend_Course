@@ -1,9 +1,10 @@
 package edu.hw2.Task3;
 
-import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-@Slf4j
 public class FaultyConnection implements Connection {
+    private static final Logger LOGGER = LogManager.getLogger();
     private final double probabilityOfFaultyConnection = 0.5;
 
     @Override
@@ -11,12 +12,12 @@ public class FaultyConnection implements Connection {
         if (Math.random() > probabilityOfFaultyConnection) {
             throw new ConnectionException();
         } else {
-            log.info("Faulty connection execute " + command);
+            LOGGER.info("Faulty connection execute " + command);
         }
     }
 
     @Override
     public void close() throws Exception {
-        log.info("Connection closed");
+        LOGGER.info("Connection closed");
     }
 }

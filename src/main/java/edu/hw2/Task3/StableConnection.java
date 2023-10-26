@@ -1,17 +1,18 @@
 package edu.hw2.Task3;
 
-import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-@Slf4j
 public class StableConnection implements Connection, AutoCloseable {
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @Override
     public void execute(String command) {
-        log.info("Stable connection execute " + command);
+        LOGGER.info("Stable connection execute " + command);
     }
 
     @Override
     public void close() throws Exception {
-        log.info("Connection closed");
+        LOGGER.info("Connection closed");
     }
 }
