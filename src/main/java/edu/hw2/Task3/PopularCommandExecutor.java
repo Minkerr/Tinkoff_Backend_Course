@@ -1,10 +1,9 @@
 package edu.hw2.Task3;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public final class PopularCommandExecutor {
-    private static final Logger LOGGER = LogManager.getLogger();
     private final ConnectionManager manager;
     private final int maxAttempts;
 
@@ -29,7 +28,7 @@ public final class PopularCommandExecutor {
                 connection.execute(command);
             } catch (Exception e) {
                 exception = e;
-                LOGGER.error("Error. ConnectionException.");
+                log.error("Error. ConnectionException.");
             }
         }
         if (exception != null) {
