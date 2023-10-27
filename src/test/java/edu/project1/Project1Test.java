@@ -52,13 +52,43 @@ public class Project1Test {
     }
 
     @Test
-    void tryGuess_shouldNotChangeGameStateWhenInputIsIncorrect() {
+    void tryGuess_shouldNotChangeGameStateWhenInputIsIncorrectNumber() {
         //arrange
         GameManager gameManager = new GameManager("test");
         char[] expectedPlayerAnswer = gameManager.getGame().getPlayerAnswer();
         int expectedAttempts = gameManager.getGame().getAttempts();
         //act
         gameManager.tryGuess("1");
+        char[] actPlayerAnswer = gameManager.getGame().getPlayerAnswer();
+        int actAttempts = gameManager.getGame().getAttempts();
+        //assert
+        assertThat(actAttempts).isEqualTo(expectedAttempts);
+        assertThat(actPlayerAnswer).isEqualTo(expectedPlayerAnswer);
+    }
+
+    @Test
+    void tryGuess_shouldNotChangeGameStateWhenInputIsIncorrectBadSymbol() {
+        //arrange
+        GameManager gameManager = new GameManager("test");
+        char[] expectedPlayerAnswer = gameManager.getGame().getPlayerAnswer();
+        int expectedAttempts = gameManager.getGame().getAttempts();
+        //act
+        gameManager.tryGuess("#");
+        char[] actPlayerAnswer = gameManager.getGame().getPlayerAnswer();
+        int actAttempts = gameManager.getGame().getAttempts();
+        //assert
+        assertThat(actAttempts).isEqualTo(expectedAttempts);
+        assertThat(actPlayerAnswer).isEqualTo(expectedPlayerAnswer);
+    }
+
+    @Test
+    void tryGuess_shouldNotChangeGameStateWhenInputIsIncorrectMoreOneCharacter() {
+        //arrange
+        GameManager gameManager = new GameManager("test");
+        char[] expectedPlayerAnswer = gameManager.getGame().getPlayerAnswer();
+        int expectedAttempts = gameManager.getGame().getAttempts();
+        //act
+        gameManager.tryGuess("aa");
         char[] actPlayerAnswer = gameManager.getGame().getPlayerAnswer();
         int actAttempts = gameManager.getGame().getAttempts();
         //assert

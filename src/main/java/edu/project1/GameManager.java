@@ -1,19 +1,19 @@
 package edu.project1;
 
 import java.util.Scanner;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class GameManager {
     private Game game;
-    private final static Logger LOGGER = LogManager.getLogger();
+    private ConsoleManager consoleManager;
 
     public GameManager(String word) {
         this.game = new Game(word);
+        this.consoleManager = new ConsoleManager(game);
     }
 
     public GameManager() {
         this.game = new Game();
+        this.consoleManager = new ConsoleManager(game);
     }
 
     public Game getGame() {
@@ -21,12 +21,13 @@ public class GameManager {
     }
 
     public GameResult run(Scanner scanner) {
-        showGameStartMessage();
+        consoleManager.showGameStartMessage();
         boolean gameIsWon = false;
 
         while (game.getAttempts() != game.getMaxAttempts()) { // game ends when attempts reaches max quantity
-            String playerInput = getPlayerInput(scanner);
-            showGuessResult(playerInput);
+            String playerInput = consoleManager.getPlayerInput(scanner);
+            GuessResult guessResult = tryGuess(playerInput);
+            consoleManager.showGuessResult(guessResult);
 
             if (game.getAnswer().equals(String.valueOf(game.getPlayerAnswer()))) {
                 gameIsWon = true;
@@ -35,53 +36,20 @@ public class GameManager {
         }
 
         GameResult gameResult = determineGameResult(gameIsWon);
-        showGameResult(gameResult);
+        consoleManager.showGameResult(gameResult);
         return gameResult;
-    }
-
-    private void showGameStartMessage() {
-        String helloMessage = "The game has started!\n";
-        String word = "The word: " + String.valueOf(game.getPlayerAnswer()) + "\n";
-        LOGGER.info(helloMessage + word);
-    }
-
-    private void showGuessResult(String playerInput) {
-        GuessResult guessResult = tryGuess(playerInput);
-        LOGGER.info(guessResult.message());
-    }
-
-    private void showGameResult(GameResult gameResult) {
-        LOGGER.info(gameResult.message());
     }
 
     private GameResult determineGameResult(boolean gameIsWon) {
-        GameResult gameResult;
-        if (gameIsWon) {
-            gameResult = new GameResult.Win();
-        } else {
-            gameResult = new GameResult.Defeat();
-        }
-        return gameResult;
-    }
-
-    public String getPlayerInput(Scanner scanner) {
-        LOGGER.info("Guess a letter:\n");
-        String playerInput = scanner.nextLine();
-        return playerInput;
+        return gameIsWon ? new GameResult.Win() : new GameResult.Defeat();
     }
 
     public GuessResult tryGuess(String input) {
-        boolean isInputCorrect = (input.length() == 1 && input.charAt(0) >= 'a' && input.charAt(0) <= 'z');
-        /* input should be one English alphabet letter */
-        if (isInputCorrect) {
-            return tryCorrectGuess(input);
-        } else {
-            return new GuessResult.IncorrectGuess(game);
-        }
-    }
+        boolean isInputCorrect = checkInputCorrectness(input);
 
-    private GuessResult tryCorrectGuess(String input) {
-        if (game.getAnswer().contains(input)) {
+        if (!isInputCorrect) {
+            return new GuessResult.IncorrectGuess(game);
+        } else if (lookForLetterInAnswer(input)) {
             char letter = input.charAt(0);
             game.rewritePlayerAnswer(letter);
             return new GuessResult.SuccessfulGuess(game);
@@ -89,6 +57,14 @@ public class GameManager {
             game.setAttempts(game.getAttempts() + 1);
             return new GuessResult.FailedGuess(game);
         }
+    }
+
+    private boolean checkInputCorrectness(String input) { // input should be one English alphabet letter
+        return (input.length() == 1 && input.charAt(0) >= 'a' && input.charAt(0) <= 'z');
+    }
+
+    private boolean lookForLetterInAnswer(String input) {
+        return game.getAnswer().contains(input);
     }
 
 }
