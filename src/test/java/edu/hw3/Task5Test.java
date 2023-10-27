@@ -10,14 +10,14 @@ public class Task5Test {
     @Test
     void parseContacts_shouldSortFourFullName() {
         // arrange
-        List<Person> exp = new ArrayList<>(List.of(
-            new Person("Thomas Aquinas"),
-            new Person("Rene Descartes"),
-            new Person("David Hume"),
-            new Person("John Locke")
+        List<Task5.Person> exp = new ArrayList<>(List.of(
+            new Task5.Person("Thomas Aquinas"),
+            new Task5.Person("Rene Descartes"),
+            new Task5.Person("David Hume"),
+            new Task5.Person("John Locke")
         ));
         // act
-        List<Person> act =
+        List<Task5.Person> act =
             parseContacts(List.of("John Locke", "Rene Descartes", "Thomas Aquinas", "David Hume"), "ACS");
         // assert
         assertThat(act).isEqualTo(exp);
@@ -26,13 +26,13 @@ public class Task5Test {
     @Test
     void parseContacts_shouldSortTreeFullNameInDescentOrder() {
         // arrange
-        List<Person> exp = new ArrayList<>(List.of(
-            new Person("Carl Gauss"),
-            new Person("Leonhard Euler"),
-            new Person("Paul Erdos")
+        List<Task5.Person> exp = new ArrayList<>(List.of(
+            new Task5.Person("Carl Gauss"),
+            new Task5.Person("Leonhard Euler"),
+            new Task5.Person("Paul Erdos")
         ));
         // act
-        List<Person> act =
+        List<Task5.Person> act =
             parseContacts(List.of("Paul Erdos", "Leonhard Euler", "Carl Gauss"), "DESC");
         // assert
         assertThat(act).isEqualTo(exp);
@@ -41,9 +41,9 @@ public class Task5Test {
     @Test
     void parseContacts_shouldReturnEmptyListForNull() {
         // arrange
-        List<Person> exp = new ArrayList<>();
+        List<Task5.Person> exp = new ArrayList<>();
         // act
-        List<Person> act =
+        List<Task5.Person> act =
             parseContacts(null, "DESC");
         // assert
         assertThat(act).isEqualTo(exp);
@@ -52,9 +52,9 @@ public class Task5Test {
     @Test
     void parseContacts_shouldSortEmptyList() {
         // arrange
-        List<Person> exp = new ArrayList<>();
+        List<Task5.Person> exp = new ArrayList<>();
         // act
-        List<Person> act = parseContacts(new ArrayList<>(), "DESC");
+        List<Task5.Person> act = parseContacts(new ArrayList<>(), "DESC");
         // assert
         assertThat(act).isEqualTo(exp);
     }
@@ -62,13 +62,13 @@ public class Task5Test {
     @Test
     void parseContacts_shouldPutContactWithoutLastNameAtTheBeginningOfTheList() {
         // arrange
-        List<Person> exp = new ArrayList<>(List.of(
-            new Person("Euler"),
-            new Person("Paul Erdos"),
-            new Person("Carl Gauss")
+        List<Task5.Person> exp = new ArrayList<>(List.of(
+            new Task5.Person("Euler"),
+            new Task5.Person("Paul Erdos"),
+            new Task5.Person("Carl Gauss")
         ));
         // act
-        List<Person> act =
+        List<Task5.Person> act =
             parseContacts(List.of("Euler", "Paul Erdos", "Carl Gauss"), "ASC");
         // assert
         assertThat(act).isEqualTo(exp);

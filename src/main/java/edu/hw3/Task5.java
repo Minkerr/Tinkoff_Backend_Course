@@ -1,57 +1,15 @@
 package edu.hw3;
 
-import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-
-class Person implements Comparable<Person> {
-    private String name;
-    private String lastName;
-
-    public Person(String name, String lastName) {
-        this.name = name;
-        this.lastName = lastName;
-    }
-
-    public Person(String fullName) {
-        String[] splitNames = fullName.split(" ");
-        this.name = splitNames[0];
-        if (splitNames.length > 1) {
-            this.lastName = splitNames[1];
-        } else {
-            this.lastName = "";
-        }
-    }
-
-    @Override
-    public int compareTo(@NotNull Person o) {
-        if (!this.lastName.equals(o.lastName)) {
-            return this.lastName.compareTo(o.lastName);
-        } else {
-            return this.name.compareTo(o.lastName);
-        }
-    }
-
-    @Override public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Person person = (Person) o;
-        return Objects.equals(name, person.name) && Objects.equals(lastName, person.lastName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, lastName);
-    }
-}
+import org.jetbrains.annotations.NotNull;
 
 public class Task5 {
+    private Task5() {
+
+    }
 
     public static List<Person> parseContacts(List<String> contactsString, String order) {
         List<Person> contacts = new ArrayList<>();
@@ -70,5 +28,45 @@ public class Task5 {
         }
 
         return contacts;
+    }
+
+    static class Person implements Comparable<Person> {
+        private String name;
+        private String lastName;
+
+        Person(String fullName) {
+            String[] splitNames = fullName.split(" ");
+            this.name = splitNames[0];
+            if (splitNames.length > 1) {
+                this.lastName = splitNames[1];
+            } else {
+                this.lastName = "";
+            }
+        }
+
+        @Override
+        public int compareTo(@NotNull Person o) {
+            if (!this.lastName.equals(o.lastName)) {
+                return this.lastName.compareTo(o.lastName);
+            } else {
+                return this.name.compareTo(o.lastName);
+            }
+        }
+
+        @Override public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Person person = (Person) o;
+            return Objects.equals(name, person.name) && Objects.equals(lastName, person.lastName);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(name, lastName);
+        }
     }
 }

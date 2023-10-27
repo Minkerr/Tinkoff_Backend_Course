@@ -3,7 +3,10 @@ package edu.hw3;
 import java.util.Comparator;
 
 public class Task7 {
-    private static final Comparator comparator = Comparator.nullsFirst(Comparator.naturalOrder());
+    private Task7() {
+    }
+
+    private static Comparator comparator = Comparator.nullsFirst(Comparator.naturalOrder());
 
     public static Comparator getComparator() {
         return comparator;

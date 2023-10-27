@@ -1,15 +1,14 @@
 package edu.hw3;
 
-import org.jetbrains.annotations.NotNull;
-import java.util.Comparator;
 import java.util.Objects;
 import java.util.PriorityQueue;
+
 
 public class Task6 {
     static class Stock implements Comparable<Stock> {
         private int price;
 
-        public Stock(int price) {
+        Stock(int price) {
             this.price = price;
         }
 
@@ -18,11 +17,12 @@ public class Task6 {
         }
 
         @Override
-        public int compareTo(@NotNull Stock o) {
+        public int compareTo(Stock o) {
             return this.price - o.price;
         }
 
-        @Override public boolean equals(Object o) {
+        @Override
+        public boolean equals(Object o) {
             if (this == o) {
                 return true;
             }
