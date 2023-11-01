@@ -82,6 +82,7 @@ public final class StreamOperationsWithAnimals {
             .toList();
     }
 
+    @SuppressWarnings("MagicNumber")
     public static List<Animal> filterBitingHighAnimals(List<Animal> animals) { //task11
         return animals.stream()
             .filter(animal -> animal.bites() && animal.height() > 100)
