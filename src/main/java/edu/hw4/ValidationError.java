@@ -48,16 +48,16 @@ public class ValidationError {
 
     public static String errorSetToString(Set<ValidationError> set) {
         StringBuilder result = new StringBuilder("This animal has the following incorrect fields: ");
-        if(set.contains(new ValidationError(IncorrectField.AGE))){
+        if (set.contains(new ValidationError(IncorrectField.AGE))) {
             result.append("age, ");
         }
-        if(set.contains(new ValidationError(IncorrectField.NAME))){
+        if (set.contains(new ValidationError(IncorrectField.NAME))) {
             result.append("name, ");
         }
-        if(set.contains(new ValidationError(IncorrectField.HEIGHT))){
+        if (set.contains(new ValidationError(IncorrectField.HEIGHT))) {
             result.append("height, ");
         }
-        if(set.contains(new ValidationError(IncorrectField.WEIGHT))){
+        if (set.contains(new ValidationError(IncorrectField.WEIGHT))) {
             result.append("weight, ");
         }
         result.delete(result.length() - 2, result.length());
