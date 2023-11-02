@@ -48,18 +48,23 @@ public class ValidationError {
 
     public static String errorSetToString(Set<ValidationError> set) {
         StringBuilder result = new StringBuilder("This animal has the following incorrect fields: ");
-        for (var it : set){
-            switch (it.incorrectField){
-                case AGE -> result.append("age, ");
-                case HEIGHT -> result.append("height, ");
-                case WEIGHT -> result.append("weight, ");
-                case NAME -> result.append("name, ");
-            }
+        if(set.contains(new ValidationError(IncorrectField.AGE))){
+            result.append("age, ");
+        }
+        if(set.contains(new ValidationError(IncorrectField.NAME))){
+            result.append("name, ");
+        }
+        if(set.contains(new ValidationError(IncorrectField.HEIGHT))){
+            result.append("height, ");
+        }
+        if(set.contains(new ValidationError(IncorrectField.WEIGHT))){
+            result.append("weight, ");
         }
         result.delete(result.length() - 2, result.length());
         return result.toString();
     }
 
+    @SuppressWarnings("MagicNumber")
     private static boolean checkAge(Animal animal) {
         return switch (animal.type()) {
             case BIRD, DOG, CAT -> 0 < animal.age() && animal.age() < 20;
@@ -68,6 +73,7 @@ public class ValidationError {
         };
     }
 
+    @SuppressWarnings("MagicNumber")
     private static boolean checkHeight(Animal animal) {
         return switch (animal.type()) {
             case DOG -> 0 < animal.height() && animal.height() < 100;
@@ -78,6 +84,7 @@ public class ValidationError {
         };
     }
 
+    @SuppressWarnings("MagicNumber")
     private static boolean checkWeight(Animal animal) {
         return switch (animal.type()) {
             case DOG -> 0 < animal.weight() && animal.weight() < 80;

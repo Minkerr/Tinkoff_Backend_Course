@@ -2,13 +2,11 @@ package edu.hw4;
 
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import static edu.hw4.ValidationError.checkForValidationErrors;
 import static edu.hw4.ValidationError.errorSetToString;
 
 public final class StreamOperationsWithAnimals {

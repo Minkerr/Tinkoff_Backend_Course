@@ -310,7 +310,7 @@ public class AnimalTest {
             new ValidationError(ValidationError.IncorrectField.HEIGHT),
             new ValidationError(ValidationError.IncorrectField.AGE),
             new ValidationError(ValidationError.IncorrectField.NAME)
-            )));
+        )));
         //act
         var act = getValidationErrors(List.of(a1, a2, a3, a4, a5));
         //assert
