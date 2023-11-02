@@ -3,9 +3,11 @@ package edu.hw4;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static edu.hw4.Animal.*;
@@ -255,6 +257,81 @@ public class AnimalTest {
         List<Animal> exp = List.of(a4, a2, a1, a5, a3);
         //act
         var act = sortAnimalsByThreeParameters(List.of(a1, a2, a3, a4, a5));
+        //assert
+        assertThat(act).isEqualTo(exp);
+    }
+
+    @Test
+    void checkWhetherSpidersBiteMoreOftenThanDogs_shouldCheckWhetherSpidersBiteMoreOftenThanDogs() {
+        //arrange
+        Animal a1 = new Animal("Mike", Type.DOG, Sex.M, 4, 400, 1, false);
+        Animal a2 = new Animal("Mike", Type.DOG, Sex.M, 1, 300, 2, true);
+        Animal a3 = new Animal("John", Type.SPIDER, Sex.M, 8, 200, 3, true);
+        Animal a4 = new Animal("John", Type.SPIDER, Sex.M, 5, 10, 4, false);
+        Animal a5 = new Animal("Mike", Type.SPIDER, Sex.F, 6, 500, 5, false);
+        //act
+        var act = checkWhetherSpidersBiteMoreOftenThanDogs(List.of(a1, a2, a3, a4, a5));
+        //assert
+        assertThat(act).isTrue();
+    }
+
+    @Test
+    void findTheHeaviestFish_shouldFindTheHeaviestFish() {
+        //arrange
+        Animal a1 = new Animal("Mike", Type.DOG, Sex.M, 4, 400, 1, false);
+        Animal a2 = new Animal("Mike", Type.DOG, Sex.M, 1, 300, 2, true);
+        Animal a3 = new Animal("John", Type.DOG, Sex.M, 8, 200, 3, true);
+        Animal a4 = new Animal("John", Type.FISH, Sex.M, 5, 10, 4, false);
+        Animal a5 = new Animal("Mike", Type.FISH, Sex.F, 6, 500, 6, false);
+        Animal a6 = new Animal("Mike", Type.FISH, Sex.F, 7, 600, 5, false);
+        Animal exp = a5;
+        //act
+        var act = findTheHeaviestFish(List.of(List.of(a1, a2), List.of(a3, a4), List.of(a5, a6)));
+        //assert
+        assertThat(act).isEqualTo(a5);
+    }
+
+    @Test
+    void getValidationErrors_shouldReturnAnimalErrors() {
+        //arrange
+        Animal a1 = new Animal("Mike Portnoy", Type.DOG, Sex.M, 4, 400, 1, false);
+        Animal a2 = new Animal("Mike111", Type.CAT, Sex.M, 100, 20, 2, true);
+        Animal a3 = new Animal("John222", Type.SPIDER, Sex.M, 1, 1, 1, true);
+        Animal a4 = new Animal("John with err*r", Type.BIRD, Sex.M, 5, 1, 400, false);
+        Animal a5 = new Animal("Bad n@me", Type.FISH, Sex.F, 62, 500, 6, false);
+        Map<String, Set<ValidationError>> exp = new HashMap<>();
+        exp.put("Mike Portnoy", new HashSet<>(List.of(new ValidationError(ValidationError.IncorrectField.HEIGHT))));
+        exp.put("Mike111", new HashSet<>(List.of(new ValidationError(ValidationError.IncorrectField.AGE))));
+        exp.put("John with err*r", new HashSet<>(List.of(
+            new ValidationError(ValidationError.IncorrectField.WEIGHT),
+            new ValidationError(ValidationError.IncorrectField.NAME)
+        )));
+        exp.put("Bad n@me", new HashSet<>(List.of(
+            new ValidationError(ValidationError.IncorrectField.HEIGHT),
+            new ValidationError(ValidationError.IncorrectField.AGE),
+            new ValidationError(ValidationError.IncorrectField.NAME)
+            )));
+        //act
+        var act = getValidationErrors(List.of(a1, a2, a3, a4, a5));
+        //assert
+        assertThat(act).isEqualTo(exp);
+    }
+
+    @Test
+    void getStringValidationErrors_shouldReturnAnimalErrorsInString() {
+        //arrange
+        Animal a1 = new Animal("Mike Portnoy", Type.DOG, Sex.M, 4, 400, 1, false);
+        Animal a2 = new Animal("Mike111", Type.CAT, Sex.M, 100, 20, 2, true);
+        Animal a3 = new Animal("John222", Type.SPIDER, Sex.M, 1, 1, 1, true);
+        Animal a4 = new Animal("John with err*r", Type.BIRD, Sex.M, 5, 1, 400, false);
+        Animal a5 = new Animal("Bad n@me", Type.FISH, Sex.F, 62, 500, 6, false);
+        Map<String, String> exp = new HashMap<>();
+        exp.put("Mike Portnoy", "This animal has the following incorrect fields: height");
+        exp.put("Mike111", "This animal has the following incorrect fields: age");
+        exp.put("John with err*r", "This animal has the following incorrect fields: name, weight");
+        exp.put("Bad n@me", "This animal has the following incorrect fields: age, name, height");
+        //act
+        var act = getStringValidationErrors(List.of(a1, a2, a3, a4, a5));
         //assert
         assertThat(act).isEqualTo(exp);
     }

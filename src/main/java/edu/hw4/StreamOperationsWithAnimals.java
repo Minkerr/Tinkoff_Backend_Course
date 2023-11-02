@@ -1,10 +1,15 @@
 package edu.hw4;
 
+import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+import static edu.hw4.ValidationError.checkForValidationErrors;
+import static edu.hw4.ValidationError.errorSetToString;
 
 public final class StreamOperationsWithAnimals {
     private StreamOperationsWithAnimals() {
@@ -119,5 +124,62 @@ public final class StreamOperationsWithAnimals {
                 .thenComparing(Animal::name)
             )
             .toList();
+    }
+
+    public static boolean checkWhetherSpidersBiteMoreOftenThanDogs(List<Animal> animals) { //task17
+        return animals.stream()
+            .anyMatch(animal -> animal.type() == Animal.Type.DOG)
+            &&
+            animals.stream()
+                .anyMatch(animal -> animal.type() == Animal.Type.SPIDER)
+            &&
+            animals.stream()
+                .filter(animal -> animal.type() == Animal.Type.DOG && animal.bites())
+                .count()
+                *
+                animals.stream()
+                    .filter(animal -> animal.type() == Animal.Type.SPIDER)
+                    .count()
+                >
+                animals.stream()
+                    .filter(animal -> animal.type() == Animal.Type.SPIDER && animal.bites())
+                    .count()
+                    *
+                    animals.stream()
+                        .filter(animal -> animal.type() == Animal.Type.DOG)
+                        .count();
+    }
+
+    public static Animal findTheHeaviestFish(List<List<Animal>> animals) { //task18
+        return animals.stream()
+            .flatMap(Collection::stream)
+            .filter(animal -> animal.type() == Animal.Type.FISH)
+            .max(Comparator.comparingInt(Animal::weight))
+            .get();
+    }
+
+    public static Map<String, Set<ValidationError>> getValidationErrors(List<Animal> animals) { //task19
+        return animals.stream()
+            .collect(Collectors.toMap(
+                Animal::name,
+                ValidationError::checkForValidationErrors
+            ))
+            .entrySet()
+            .stream()
+            .filter(element -> !element.getValue().isEmpty())
+            .collect(Collectors.toMap(
+                Map.Entry::getKey,
+                Map.Entry::getValue
+            ));
+    }
+
+    public static Map<String, String> getStringValidationErrors(List<Animal> animals) { //task20
+        return getValidationErrors(animals)
+            .entrySet()
+            .stream()
+            .collect(Collectors.toMap(
+                Map.Entry::getKey,
+                v -> errorSetToString(v.getValue())
+            ));
     }
 }
