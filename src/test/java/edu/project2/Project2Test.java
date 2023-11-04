@@ -12,11 +12,17 @@ public class Project2Test {
         ConsoleRenderer renderer = new ConsoleRenderer();
         System.out.println(renderer.render(maze));
 
-        DFSSolver solver = new DFSSolver();
-        List<Coordinate> solution = solver.solve(maze,
+        DFSSolver DFSsolver = new DFSSolver();
+        List<Coordinate> DFSsolution = DFSsolver.solve(maze,
             new Coordinate(1,1), new Coordinate(1,maze.getWidth() - 2));
 
-        System.out.println(renderer.render(maze, solution));
+        System.out.println(renderer.render(maze, DFSsolution));
+
+        BFSSolver BFSsolver = new BFSSolver();
+        List<Coordinate> BFSsolution = BFSsolver.solve(maze,
+            new Coordinate(1,1), new Coordinate(1,maze.getWidth() - 2));
+
+        System.out.println(renderer.render(maze, BFSsolution));
     }
 
     @Test
