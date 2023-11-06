@@ -24,4 +24,41 @@ public interface Generator {
     default int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
     }
+
+    @SuppressWarnings("CyclomaticComplexity")
+    default boolean checkThatWallAreOnOneSide(Cell[][] grid, int row, int col) {
+        boolean right = grid[row][col + 1].type() == Cell.Type.PASSAGE;
+        boolean bottomRight = grid[row + 1][col + 1].type() == Cell.Type.PASSAGE;
+        boolean bottom = grid[row + 1][col].type() == Cell.Type.PASSAGE;
+        boolean bottomLeft = grid[row + 1][col - 1].type() == Cell.Type.PASSAGE;
+        boolean left = grid[row][col - 1].type() == Cell.Type.PASSAGE;
+        boolean topLeft = grid[row - 1][col - 1].type() == Cell.Type.PASSAGE;
+        boolean top = grid[row - 1][col].type() == Cell.Type.PASSAGE;
+        boolean topRight = grid[row - 1][col + 1].type() == Cell.Type.PASSAGE;
+        boolean result = false;
+
+        if (grid[row + 1][col].type() == Cell.Type.WALL) {
+            result = left && topLeft && top && topRight && right;
+        }
+        if (grid[row - 1][col].type() == Cell.Type.WALL) {
+            result = left && bottomLeft && bottom && bottomRight && right;
+        }
+        if (grid[row][col - 1].type() == Cell.Type.WALL) {
+            result = top && topRight && right && bottomRight && bottom;
+        }
+        if (grid[row][col + 1].type() == Cell.Type.WALL) {
+            result = top && topLeft && left && bottomLeft && bottom;
+        }
+        return result;
+    }
+
+    default void addExtraWallsIfPossible(Cell[][] grid, int height, int width) {
+        for (int i = 1; i < height - 1; i++) {
+            for (int j = 1; j < width - 1; j++) {
+                if (checkThatWallAreOnOneSide(grid, i, j)) {
+                    grid[i][j] = new Cell(i, j, Cell.Type.WALL);
+                }
+            }
+        }
+    }
 }
