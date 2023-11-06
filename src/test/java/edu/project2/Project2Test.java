@@ -1,28 +1,37 @@
 package edu.project2;
 
-import org.junit.jupiter.api.Test;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Project2Test {
     @Test
     void renderMaze() {
-        IdealGenerator generator = new IdealGenerator();
-        Maze maze = generator.generate(20, 40);
+        IdealGenerator idealGenerator = new IdealGenerator();
+        RandomGenerator randomGenerator = new RandomGenerator();
+        Maze idealMaze = idealGenerator.generate(20, 40);
+        Maze randonMaze = randomGenerator.generate(20, 40);
         ConsoleRenderer renderer = new ConsoleRenderer();
-        System.out.println(renderer.render(maze));
 
         DFSSolver DFSsolver = new DFSSolver();
-        List<Coordinate> DFSsolution = DFSsolver.solve(maze,
-            new Coordinate(1,1), new Coordinate(1,maze.getWidth() - 2));
-
-        System.out.println(renderer.render(maze, DFSsolution));
-
         BFSSolver BFSsolver = new BFSSolver();
-        List<Coordinate> BFSsolution = BFSsolver.solve(maze,
-            new Coordinate(1,1), new Coordinate(1,maze.getWidth() - 2));
 
-        System.out.println(renderer.render(maze, BFSsolution));
+        List<Coordinate> DFSsolutionIdeal = DFSsolver.solve(idealMaze,
+            new Coordinate(1,1), new Coordinate(1,idealMaze.getWidth() - 2));
+        System.out.println(renderer.render(idealMaze, DFSsolutionIdeal));
+
+        List<Coordinate> BFSsolutionIdeal = BFSsolver.solve(idealMaze,
+            new Coordinate(1,1), new Coordinate(1,idealMaze.getWidth() - 2));
+        System.out.println(renderer.render(idealMaze, BFSsolutionIdeal));
+
+        List<Coordinate> DFSsolutionRandom = DFSsolver.solve(randonMaze,
+            new Coordinate(1,1), new Coordinate(1,randonMaze.getWidth() - 2));
+        System.out.println(renderer.render(randonMaze, DFSsolutionRandom));
+
+        List<Coordinate> BFSsolutionRandom = BFSsolver.solve(randonMaze,
+            new Coordinate(1,1), new Coordinate(1,randonMaze.getWidth() - 2));
+        System.out.println(renderer.render(randonMaze, BFSsolutionRandom));
+
     }
 
     @Test
