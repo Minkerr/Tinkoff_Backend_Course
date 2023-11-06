@@ -1,7 +1,8 @@
 package edu.project2;
 
-public class RandomGenerator implements Generator{
+public class RandomGenerator implements Generator {
     private final int wallGenerationAttemptCoefficient = 100;
+
     @Override
     public Maze generate(int height, int width) {
         Cell[][] grid = generateEmptyMazeWithExternalWall(height, width);
@@ -42,7 +43,7 @@ public class RandomGenerator implements Generator{
         return right && bottomRight && bottom && bottomLeft && left && topLeft && top && topRight;
     }
 
-        @SuppressWarnings("CyclomaticComplexity")
+    @SuppressWarnings("CyclomaticComplexity")
     private boolean checkThatWallAreOnOneSide(Cell[][] grid, int row, int col) {
         boolean right = grid[row][col + 1].type() == Cell.Type.PASSAGE;
         boolean bottomRight = grid[row + 1][col + 1].type() == Cell.Type.PASSAGE;
