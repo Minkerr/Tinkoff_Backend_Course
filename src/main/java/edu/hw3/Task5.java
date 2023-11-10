@@ -40,17 +40,25 @@ public class Task5 {
             if (splitNames.length > 1) {
                 this.lastName = splitNames[1];
             } else {
-                this.lastName = "";
+                this.lastName = ""; // it means there is no last name
             }
         }
 
         @Override
         public int compareTo(@NotNull Person o) {
-            if (!this.lastName.equals(o.lastName)) {
-                return this.lastName.compareTo(o.lastName);
-            } else {
+            if (lastNameIsMissing(this) && lastNameIsMissing(o)) {
+                return this.name.compareTo(o.name);
+            } else if (lastNameIsMissing(this)) {
                 return this.name.compareTo(o.lastName);
+            } else if (lastNameIsMissing(o)) {
+                return this.lastName.compareTo(o.name);
+            } else {
+                return this.lastName.compareTo(o.lastName);
             }
+        }
+
+        private boolean lastNameIsMissing(Person person) {
+            return person.lastName.isEmpty();
         }
 
         @Override public boolean equals(Object o) {

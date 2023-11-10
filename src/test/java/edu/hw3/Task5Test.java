@@ -60,11 +60,11 @@ public class Task5Test {
     }
 
     @Test
-    void parseContacts_shouldPutContactWithoutLastNameAtTheBeginningOfTheList() {
+    void parseContacts_shouldPutContactWithoutLastNameByName() {
         // arrange
         List<Task5.Person> exp = new ArrayList<>(List.of(
-            new Task5.Person("Euler"),
             new Task5.Person("Paul Erdos"),
+            new Task5.Person("Euler"),
             new Task5.Person("Carl Gauss")
         ));
         // act

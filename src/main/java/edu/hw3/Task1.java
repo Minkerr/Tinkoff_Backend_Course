@@ -11,9 +11,7 @@ public class Task1 {
 
             if ('a' <= c[i] && c[i] <= 'z') {
                 c[i] = (char) ('z' - (c[i] - 'a'));
-            }
-
-            if ('A' <= c[i] && c[i] <= 'Z') {
+            } else if ('A' <= c[i] && c[i] <= 'Z') {
                 c[i] = (char) ('Z' - (c[i] - 'A'));
             }
         }

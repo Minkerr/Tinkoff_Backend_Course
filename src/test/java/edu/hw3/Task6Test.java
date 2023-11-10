@@ -45,9 +45,9 @@ public class Task6Test {
         Task6.Stock exp = new Task6.Stock(10);
         //act
         Task6.StockMarket stockMarket = new Task6.StockMarket();
-        stockMarket.add(new Task6.Stock(5));
-        stockMarket.add(new Task6.Stock(10));
         stockMarket.add(new Task6.Stock(15));
+        stockMarket.add(new Task6.Stock(10));
+        stockMarket.add(new Task6.Stock(5));
         stockMarket.remove(new Task6.Stock(15)); //The most expensive Stock has deleted
         Task6.Stock act = stockMarket.mostValuableStock();
         //assert

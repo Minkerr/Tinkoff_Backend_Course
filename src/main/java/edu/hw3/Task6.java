@@ -3,9 +3,8 @@ package edu.hw3;
 import java.util.Objects;
 import java.util.PriorityQueue;
 
-
 public class Task6 {
-    static class Stock implements Comparable<Stock> {
+    static class Stock {
         private int price;
 
         Stock(int price) {
@@ -14,11 +13,6 @@ public class Task6 {
 
         public int getPrice() {
             return price;
-        }
-
-        @Override
-        public int compareTo(Stock o) {
-            return this.price - o.price;
         }
 
         @Override
