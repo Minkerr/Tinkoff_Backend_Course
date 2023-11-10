@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 import static edu.hw4.ValidationError.errorSetToString;
 
@@ -21,7 +22,7 @@ public final class StreamOperationsWithAnimals {
 
     public static List<Animal> sortAnimalsByWeight(List<Animal> animals, int k) { //task2
         return animals.stream()
-            .sorted((leftAnimal, rightAnimal) -> rightAnimal.weight() - leftAnimal.weight())
+            .sorted(Comparator.comparingInt(Animal::weight).reversed())
             .limit(k)
             .toList();
     }
@@ -49,15 +50,10 @@ public final class StreamOperationsWithAnimals {
 
     public static Map<Animal.Type, Animal> findTheHeaviestAnimalForEveryType(List<Animal> animals) { //task6
         return animals.stream()
-            .collect(Collectors.groupingBy(
-                Animal::type,
-                Collectors.maxBy(Comparator.comparingInt(Animal::weight))
-            ))
-            .entrySet()
-            .stream()
             .collect(Collectors.toMap(
-                Map.Entry::getKey,
-                v -> v.getValue().get()
+                Animal::type,
+                animal -> animal,
+                BinaryOperator.maxBy(Comparator.comparingInt(Animal::weight))
             ));
     }
 
@@ -88,7 +84,8 @@ public final class StreamOperationsWithAnimals {
     @SuppressWarnings("MagicNumber")
     public static List<Animal> filterBitingHighAnimals(List<Animal> animals) { //task11
         return animals.stream()
-            .filter(animal -> animal.bites() && animal.height() > 100)
+            .filter(Animal::bites)
+            .filter(animal -> animal.height() > 100)
             .toList();
     }
 
@@ -100,7 +97,7 @@ public final class StreamOperationsWithAnimals {
 
     public static List<Animal> filterAnimalsWithNamesWithTwoOrMOreWords(List<Animal> animals) { //task13
         return animals.stream()
-            .filter(animal -> animal.name().contains(" "))
+            .filter(animal -> animal.name().split(" ").length > 2)
             .toList();
     }
 
@@ -125,27 +122,27 @@ public final class StreamOperationsWithAnimals {
     }
 
     public static boolean checkWhetherSpidersBiteMoreOftenThanDogs(List<Animal> animals) { //task17
-        return animals.stream()
-            .anyMatch(animal -> animal.type() == Animal.Type.DOG)
-            &&
-            animals.stream()
-                .anyMatch(animal -> animal.type() == Animal.Type.SPIDER)
-            &&
+        boolean hasDogs = animals.stream().anyMatch(animal -> animal.type() == Animal.Type.DOG);
+        boolean hasSpiders = animals.stream().anyMatch(animal -> animal.type() == Animal.Type.SPIDER);
+        long dogBiteChance =
             animals.stream()
                 .filter(animal -> animal.type() == Animal.Type.DOG && animal.bites())
                 .count()
                 *
                 animals.stream()
                     .filter(animal -> animal.type() == Animal.Type.SPIDER)
-                    .count()
-                >
+                    .count();
+
+        long spiderBiteChance =
+            animals.stream()
+                .filter(animal -> animal.type() == Animal.Type.SPIDER && animal.bites())
+                .count()
+                *
                 animals.stream()
-                    .filter(animal -> animal.type() == Animal.Type.SPIDER && animal.bites())
-                    .count()
-                    *
-                    animals.stream()
-                        .filter(animal -> animal.type() == Animal.Type.DOG)
-                        .count();
+                    .filter(animal -> animal.type() == Animal.Type.DOG)
+                    .count();
+
+        return hasDogs && hasSpiders && dogBiteChance > spiderBiteChance;
     }
 
     public static Animal findTheHeaviestFish(List<List<Animal>> animals) { //task18

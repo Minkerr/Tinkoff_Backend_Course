@@ -204,10 +204,10 @@ public class AnimalTest {
     void filterAnimalsWithNamesWithTwoOrMOreWords_shouldFilterAnimalsWithNamesWithTwoOrMOreWords() {
         //arrange
         Animal a1 = new Animal("Peter", Type.BIRD, Sex.M, 2, 400, 1, false);
-        Animal a2 = new Animal("Mike Mangini", Type.CAT, Sex.M, 1, 300, 2, true);
+        Animal a2 = new Animal("Mike Mangini 2023", Type.CAT, Sex.M, 1, 300, 2, true);
         Animal a3 = new Animal("Bob", Type.SPIDER, Sex.M, 8, 200, 3, true);
         Animal a4 = new Animal("John", Type.FISH, Sex.M, 1, 10, 4, false);
-        Animal a5 = new Animal("Mike Portnoy", Type.DOG, Sex.M, 4, 500, 5, false);
+        Animal a5 = new Animal("Mike Stephen Portnoy", Type.DOG, Sex.M, 4, 500, 5, false);
         List<Animal> exp = List.of(a2, a5);
         //act
         var act = filterAnimalsWithNamesWithTwoOrMOreWords(List.of(a1, a2, a3, a4, a5));

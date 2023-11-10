@@ -36,16 +36,6 @@ public class ValidationError {
         return set;
     }
 
-//    private boolean checkForIncorrectField(Animal animal, String field) {
-//        return switch (field) {
-//            case "age" -> checkAge(animal);
-//            case "name" -> checkName(animal);
-//            case "height" -> checkHeight(animal);
-//            case "weight" -> checkWeight(animal);
-//            default -> throw new IllegalStateException("Unexpected value: " + field);
-//        };
-//    }
-
     public static String errorSetToString(Set<ValidationError> set) {
         StringBuilder result = new StringBuilder("This animal has the following incorrect fields: ");
         if (set.contains(new ValidationError(IncorrectField.AGE))) {
@@ -98,11 +88,8 @@ public class ValidationError {
         return Pattern.matches("^[a-zA-Z0-9\\s]*$", animal.name());
     }
 
-    public IncorrectField getIncorrectField() {
-        return incorrectField;
-    }
-
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
