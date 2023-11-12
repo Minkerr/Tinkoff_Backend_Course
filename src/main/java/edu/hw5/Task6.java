@@ -1,12 +1,15 @@
 package edu.hw5;
 
 public class Task6 {
-    public static boolean isASubstring(String S, String T) {
+    public static boolean isASubstring(String s, String t) {
         StringBuilder substringRegex = new StringBuilder(".*");
-        for(int i = 0; i < T.length(); i++){
-            substringRegex.append(S.charAt(i));
+        for (int i = 0; i < t.length(); i++) {
+            substringRegex.append(s.charAt(i));
             substringRegex.append(".*");
         }
-        return S.matches(String.valueOf(substringRegex));
+        return s.matches(String.valueOf(substringRegex));
+    }
+
+    private Task6() {
     }
 }
