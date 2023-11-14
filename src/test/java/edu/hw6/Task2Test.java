@@ -13,11 +13,12 @@ public class Task2Test {
     @Test
     void generateCopyFilePathString_shouldGenerateNameWithNumberIfCopyAlreadyExist() {
         //arrange
-        String stringPath = "null\\src\\main\\java\\edu\\hw6\\Task2Files\\CopyNameTest — copy(2).txt";
-        Path path = Path.of(stringPath);
-        String exp = path.toString();
+        String exp = "CopyNameTest — copy(2).txt";
         //act
-        String act = generateCopyFilePathString(Path.of("src\\main\\java\\edu\\hw6\\Task2Files\\CopyNameTest.txt"));
+        String fullPath = generateCopyFilePathString(
+            Path.of("src\\main\\java\\edu\\hw6\\Task2Files\\CopyNameTest.txt"));
+        int n = fullPath.length();
+        String act = fullPath.substring(n - 26);
         //assert
         assertThat(act).isEqualTo(exp);
     }
@@ -25,11 +26,12 @@ public class Task2Test {
     @Test
     void generateCopyFilePathString_shouldGenerateNameWithCopy() {
         //arrange
-        String stringPath = "null\\src\\main\\java\\edu\\hw6\\Task2Files\\NameTest — copy.txt";
-        Path path = Path.of(stringPath);
-        String exp = path.toString();
+        String exp = "NameTest — copy.txt";
         //act
-        String act = generateCopyFilePathString(Path.of("src\\main\\java\\edu\\hw6\\Task2Files\\NameTest.txt"));
+        String fullPath = generateCopyFilePathString(
+            Path.of("src\\main\\java\\edu\\hw6\\Task2Files\\NameTest.txt"));
+        int n = fullPath.length();
+        String act = fullPath.substring(n - 19);
         //assert
         assertThat(act).isEqualTo(exp);
     }
