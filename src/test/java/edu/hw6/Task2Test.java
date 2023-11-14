@@ -11,9 +11,11 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task2Test {
     @Test
-    void generateCopyFilePathString_shouldGenerateNameWithNumberIfCopyAlreadyExist (){
+    void generateCopyFilePathString_shouldGenerateNameWithNumberIfCopyAlreadyExist() {
         //arrange
-        String exp = "src\\main\\java\\edu\\hw6\\Task2Files\\CopyNameTest — copy(2).txt";
+        String stringPath = "src\\main\\java\\edu\\hw6\\Task2Files\\CopyNameTest — copy(2).txt";
+        Path path = Path.of(stringPath);
+        String exp = path.toString();
         //act
         String act = generateCopyFilePathString(Path.of("src\\main\\java\\edu\\hw6\\Task2Files\\CopyNameTest.txt"));
         //assert
@@ -21,9 +23,11 @@ public class Task2Test {
     }
 
     @Test
-    void generateCopyFilePathString_shouldGenerateNameWithCopy (){
+    void generateCopyFilePathString_shouldGenerateNameWithCopy() {
         //arrange
-        String exp = "src\\main\\java\\edu\\hw6\\Task2Files\\NameTest — copy.txt";
+        String stringPath = "src\\main\\java\\edu\\hw6\\Task2Files\\NameTest — copy.txt";
+        Path path = Path.of(stringPath);
+        String exp = path.toString();
         //act
         String act = generateCopyFilePathString(Path.of("src\\main\\java\\edu\\hw6\\Task2Files\\NameTest.txt"));
         //assert
@@ -31,7 +35,7 @@ public class Task2Test {
     }
 
     @Test
-    void cloneFile_shouldCreateCopyWithSpecialName(){
+    void cloneFile_shouldCreateCopyWithSpecialName() {
         //arrange
         Path path = Path.of("src\\main\\java\\edu\\hw6\\Task2Files\\Secret.txt");
         String copyName = generateCopyFilePathString(path);

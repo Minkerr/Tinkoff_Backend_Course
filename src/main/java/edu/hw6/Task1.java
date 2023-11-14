@@ -73,6 +73,7 @@ public class Task1 {
             return null;
         }
     }
+
     private Task1() {
 
     }

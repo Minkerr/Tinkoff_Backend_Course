@@ -9,26 +9,8 @@ import java.nio.file.Paths;
 public class Task2 {
     public static void cloneFile(Path path) {
         try {
-            Path correctPath = Path.of(generateCopyFilePathString(path));
-            FileChannel inChannel = FileChannel.open(path);
-            ByteBuffer buffer = ByteBuffer.allocate(256);
-            StringBuilder content = new StringBuilder();
-
-            int bytesRead = inChannel.read(buffer);
-            while (bytesRead != -1) {
-                buffer.flip();
-
-                while (buffer.hasRemaining()) {
-                    content.append((char) (buffer.get()));
-                }
-
-                buffer.clear();
-                bytesRead = inChannel.read(buffer);
-            }
-            inChannel.close();
-
-            byte[] bs = content.toString().getBytes();
-            Files.write(correctPath, bs);
+            Path newPath = Path.of(generateCopyFilePathString(path));
+            Files.copy(path, newPath);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,15 +24,15 @@ public class Task2 {
         Path pathCopy = Paths.get(pathWithoutTxt + " — copy.txt");
         if (Files.exists(pathCopy)) {
             int i = 2;
-            while (Files.exists(pathCopy)){
-                pathCopy = Paths.get(pathWithoutTxt + " — copy("+ i +").txt");
+            while (Files.exists(pathCopy)) {
+                pathCopy = Paths.get(pathWithoutTxt + " — copy(" + i + ").txt");
                 i++;
             }
         }
         return pathCopy.toString();
     }
 
-    private Task2(){
+    private Task2() {
 
     }
 }
