@@ -15,10 +15,8 @@ public class Task2Test {
         //arrange
         String exp = "CopyNameTest — copy(2).txt";
         //act
-        String fullPath = generateCopyFilePathString(
+        String act = generateCopyFilePathString(
             Path.of("src\\main\\java\\edu\\hw6\\Task2Files\\CopyNameTest.txt"));
-        int n = fullPath.length();
-        String act = fullPath.substring(n - 26);
         //assert
         assertThat(act).isEqualTo(exp);
     }
@@ -28,10 +26,8 @@ public class Task2Test {
         //arrange
         String exp = "NameTest — copy.txt";
         //act
-        String fullPath = generateCopyFilePathString(
+        String act = generateCopyFilePathString(
             Path.of("src\\main\\java\\edu\\hw6\\Task2Files\\NameTest.txt"));
-        int n = fullPath.length();
-        String act = fullPath.substring(n - 19);
         //assert
         assertThat(act).isEqualTo(exp);
     }
@@ -41,7 +37,7 @@ public class Task2Test {
         //arrange
         Path path = Path.of("src\\main\\java\\edu\\hw6\\Task2Files\\Secret.txt");
         String copyName = generateCopyFilePathString(path);
-        Path copyPath = Path.of(copyName);
+        Path copyPath = Path.of(path.getParent() + "\\" + copyName);
         //act
         cloneFile(path);
         boolean fileIsExist = Files.exists(copyPath);
