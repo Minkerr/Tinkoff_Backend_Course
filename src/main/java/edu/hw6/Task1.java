@@ -1,10 +1,10 @@
 package edu.hw6;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class Task1 {
     class DiskMap implements Map<String, String> {
@@ -74,7 +74,4 @@ public class Task1 {
         }
     }
 
-    private Task1() {
-
-    }
 }

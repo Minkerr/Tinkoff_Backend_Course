@@ -13,7 +13,7 @@ public class Task2Test {
     @Test
     void generateCopyFilePathString_shouldGenerateNameWithNumberIfCopyAlreadyExist() {
         //arrange
-        String stringPath = "src\\main\\java\\edu\\hw6\\Task2Files\\CopyNameTest — copy(2).txt";
+        String stringPath = "null\\src\\main\\java\\edu\\hw6\\Task2Files\\CopyNameTest — copy(2).txt";
         Path path = Path.of(stringPath);
         String exp = path.toString();
         //act
@@ -25,7 +25,7 @@ public class Task2Test {
     @Test
     void generateCopyFilePathString_shouldGenerateNameWithCopy() {
         //arrange
-        String stringPath = "src\\main\\java\\edu\\hw6\\Task2Files\\NameTest — copy.txt";
+        String stringPath = "null\\src\\main\\java\\edu\\hw6\\Task2Files\\NameTest — copy.txt";
         Path path = Path.of(stringPath);
         String exp = path.toString();
         //act
@@ -35,7 +35,7 @@ public class Task2Test {
     }
 
     @Test
-    void cloneFile_shouldCreateCopyWithSpecialName() {
+    void cloneFile_shouldCreateCopyWithSpecialName() throws IOException {
         //arrange
         Path path = Path.of("src\\main\\java\\edu\\hw6\\Task2Files\\Secret.txt");
         String copyName = generateCopyFilePathString(path);
