@@ -12,18 +12,16 @@ import java.nio.file.Path;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import static edu.project3.Analysis.averageResponseSize;
 import static edu.project3.Analysis.requestedCodes;
 import static edu.project3.Analysis.requestedResources;
 import static edu.project3.ReportGenerator.generateMarkdownReportGeneral;
-import static edu.project3.ReportGenerator.generateMarkdownReportResources;
 
 public class Parser {
     private static final int EXPECTATION_TIME = 20;
 
-    @SuppressWarnings("MagicNumber")
+    @SuppressWarnings({"RegexpSinglelineJava", "MagicNumber"})
     public static void main(String[] args) {
         String path = args[4];
         String from = "";
@@ -34,6 +32,7 @@ public class Parser {
                 case "--from" -> from = args[i + 1];
                 case "--to" -> to = args[i + 1];
                 case "--format" -> format = args[i + 1];
+                //default -> ;
             }
         }
 
@@ -45,20 +44,18 @@ public class Parser {
         System.out.println(logs[22]);
         System.out.println(averageResponseSize(logs));
         var res = requestedResources(logs);
-        for (var el :
-            res.keySet()) {
+        for (var el : res.keySet()) {
             System.out.println(el + " " + res.get(el));
         }
         var codes = requestedCodes(logs);
-        for (var el :
-            codes.keySet()) {
+        for (var el : codes.keySet()) {
             System.out.println(el + " " + codes.get(el));
         }
         generateMarkdownReportGeneral(logs);
         //generateMarkdownReportResources(logs);
     }
 
-    public static String[] parseFile(String path){
+    public static String[] parseFile(String path) {
         try (BufferedReader reader = Files.newBufferedReader(Path.of(path));) {
             List<String> res = new ArrayList<>();
             String line;
@@ -72,7 +69,7 @@ public class Parser {
 
     }
 
-    public static String[] parseURL(String URL) {
+    public static String[] parseURL(String url) {
         HttpClient client = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(EXPECTATION_TIME))
             .build();
@@ -80,7 +77,7 @@ public class Parser {
         HttpRequest request = null;
         try {
             request = HttpRequest.newBuilder()
-                .uri(new URI(URL))
+                .uri(new URI(url))
                 .GET()
                 .timeout(Duration.of(EXPECTATION_TIME, ChronoUnit.SECONDS))
                 .build();

@@ -20,7 +20,7 @@ public class ReportGeneratorTest {
             + "|:-:|-:|\n"
             + "|Response Quantity|3|\n"
             + "|Average Response Size|130|\n";
-        String [] logs = parseFile("src\\main\\java\\edu\\project3\\input\\logs.txt");
+        String[] logs = parseFile("src\\main\\java\\edu\\project3\\input\\logs.txt");
 
         var act = generateMarkdownReportGeneral(logs);
         assertThat(act).isEqualTo(exp);

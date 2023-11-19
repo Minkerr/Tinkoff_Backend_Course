@@ -9,6 +9,9 @@ import static edu.project3.Analysis.requestedCodes;
 import static edu.project3.Analysis.requestedResources;
 
 public class ReportGenerator {
+    private ReportGenerator() {
+    }
+
     public static String generateMarkdownReportGeneral(String[] logs) {
         Path path = Path.of("src\\main\\java\\edu\\project3\\output\\report.md");
         StringBuilder table = new StringBuilder("|Metrics|Value|\n");
