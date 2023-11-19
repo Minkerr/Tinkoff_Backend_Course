@@ -1,16 +1,21 @@
 package edu.hw6;
 
-import org.junit.jupiter.api.Test;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import org.junit.jupiter.api.Test;
+import static edu.hw6.Task3.globMatchesTxt;
+import static edu.hw6.Task3.largerThan100000;
+import static edu.hw6.Task3.magicNumber089;
+import static edu.hw6.Task3.regexContainsDigit;
+import static edu.hw6.Task3.writable;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static edu.hw6.Task3.*;
 
 public class Task3Test {
     @Test
@@ -33,7 +38,7 @@ public class Task3Test {
     @Test
     void writable_shouldFilterOnlyWritableFiles() {
         DirectoryStream.Filter<Path> filter = writable;
-        List<String> exp = List.of(
+        Set<String> exp = Set.of(
             "CopyNameTest — copy.txt",
             "CopyNameTest.txt",
             "dt.jpg",
@@ -48,7 +53,7 @@ public class Task3Test {
         Path dir = Path.of("src" + File.separator + "test" + File.separator + "java" +
             File.separator + "edu" + File.separator + "hw6" + File.separator + "Task3Files");
 
-        List<String> act = new ArrayList<>();
+        Set<String> act = new HashSet<>();
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(dir, filter)) {
             entries.forEach(el -> act.add(String.valueOf(el.getFileName())));
         } catch (IOException e) {
@@ -61,11 +66,11 @@ public class Task3Test {
     @Test
     void globMatchesTxtAndRegexContainsDigit_shouldFilterOnlyTxtFilesWithDigitInName() {
         DirectoryStream.Filter<Path> filter = globMatchesTxt.and(regexContainsDigit);
-        List<String> exp = List.of("Secret — copy(2).txt");
+        Set<String> exp = Set.of("Secret — copy(2).txt");
         Path dir = Path.of("src" + File.separator + "test" + File.separator + "java" +
             File.separator + "edu" + File.separator + "hw6" + File.separator + "Task3Files");
 
-        List<String> act = new ArrayList<>();
+        Set<String> act = new HashSet<>();
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(dir, filter)) {
             entries.forEach(el -> act.add(String.valueOf(el.getFileName())));
         } catch (IOException e) {
@@ -78,11 +83,11 @@ public class Task3Test {
     @Test
     void largerThan_shouldFilterOnlyHeavyFiles() {
         DirectoryStream.Filter<Path> filter = largerThan100000;
-        List<String> exp = List.of("dt.jpg", "formula.png", "lovecraft.jpg");
+        Set<String> exp = Set.of("dt.jpg", "formula.png", "lovecraft.jpg");
         Path dir = Path.of("src" + File.separator + "test" + File.separator + "java" +
             File.separator + "edu" + File.separator + "hw6" + File.separator + "Task3Files");
 
-        List<String> act = new ArrayList<>();
+        Set<String> act = new HashSet<>();
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(dir, filter)) {
             entries.forEach(el -> act.add(String.valueOf(el.getFileName())));
         } catch (IOException e) {
