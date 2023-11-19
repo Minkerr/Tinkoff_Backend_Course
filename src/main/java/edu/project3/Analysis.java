@@ -7,11 +7,14 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Analysis {
-    public static int countLogs(String [] logs) {
+    private Analysis() {
+    }
+
+    public static int countLogs(String[] logs) {
         return logs.length;
     }
 
-    public static Map<String, Long> requestedResources(String [] logs) {
+    public static Map<String, Long> requestedResources(String[] logs) {
         return Arrays.stream(logs)
             .map(el -> {
                 Pattern pattern = Pattern.compile("] \"(.*?)\"");
@@ -25,7 +28,7 @@ public class Analysis {
     }
 
     @SuppressWarnings("MagicNumber")
-    public static Map<Integer, Long> requestedCodes(String [] logs) {
+    public static Map<Integer, Long> requestedCodes(String[] logs) {
         return Arrays.stream(logs)
             .map(el -> {
                 Pattern pattern = Pattern.compile("] \"(.*?)\" (\\d+)");
@@ -38,7 +41,7 @@ public class Analysis {
             .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
     }
 
-    public static int averageResponseSize(String [] logs) {
+    public static int averageResponseSize(String[] logs) {
         return (int) Arrays.stream(logs)
             .mapToInt(String::length)
             .average()

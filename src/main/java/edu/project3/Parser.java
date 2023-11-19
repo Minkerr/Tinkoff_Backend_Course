@@ -12,6 +12,7 @@ import static edu.project3.Analysis.averageResponseSize;
 import static edu.project3.Analysis.requestedCodes;
 import static edu.project3.Analysis.requestedResources;
 import static edu.project3.ReportGenerator.generateMarkdownReportGeneral;
+import static edu.project3.ReportGenerator.generateMarkdownReportResources;
 
 public class Parser {
     private static final int EXPECTATION_TIME = 20;
@@ -30,7 +31,7 @@ public class Parser {
             }
         }
 
-        String [] logs = parseURL(path);
+        String[] logs = parseURL(path);
         System.out.println(logs.length);
         System.out.println(path);
         System.out.println(logs[2]);
@@ -48,9 +49,10 @@ public class Parser {
             System.out.println(el + " " + codes.get(el));
         }
         generateMarkdownReportGeneral(logs);
+        generateMarkdownReportResources(logs);
     }
 
-    public static String [] parseURL(String URL) {
+    public static String[] parseURL(String URL) {
         HttpClient client = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(EXPECTATION_TIME))
             .build();
