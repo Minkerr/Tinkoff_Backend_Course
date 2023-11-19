@@ -11,8 +11,8 @@ import static edu.project3.Analysis.requestedResources;
 public class ReportGenerator {
     public static String generateMarkdownReportGeneral(String[] logs) {
         Path path = Path.of("src\\main\\java\\edu\\project3\\output\\report.md");
-        StringBuilder table = new StringBuilder("|      Metrics      |     Value    |\n");
-        table.append("|:------------:|----------:|\n");
+        StringBuilder table = new StringBuilder("|Metrics|Value|\n");
+        table.append("|:-:|-:|\n");
         table.append("|Response Quantity|").append(countLogs(logs)).append("|\n");
         table.append("|Average Response Size|").append(averageResponseSize(logs)).append("|\n");
 
@@ -26,8 +26,8 @@ public class ReportGenerator {
 
     public static String generateMarkdownReportCodes(String[] logs) {
         Path path = Path.of("src\\main\\java\\edu\\project3\\output\\report.md");
-        StringBuilder table = new StringBuilder("|    Code    |     Quantity    |\n");
-        table.append("|:------------:|----------:|\n");
+        StringBuilder table = new StringBuilder("|Code|Quantity|\n");
+        table.append("|:-:|-:|\n");
         var resources = requestedCodes(logs);
         for (var log : resources.keySet()) {
             table.append("|").append(log).append("|").append(resources.get(log)).append("|\n");
@@ -42,8 +42,8 @@ public class ReportGenerator {
 
     public static String generateMarkdownReportResources(String[] logs) {
         Path path = Path.of("src\\main\\java\\edu\\project3\\output\\report.md");
-        StringBuilder table = new StringBuilder("|      Resource     |     Quantity    |\n");
-        table.append("|:------------:|----------:|\n");
+        StringBuilder table = new StringBuilder("|Resource|Quantity|\n");
+        table.append("|:-:|-:|\n");
         var resources = requestedResources(logs);
         for (var log : resources.keySet()) {
             table.append("|").append(log).append("|").append(resources.get(log)).append("|\n");

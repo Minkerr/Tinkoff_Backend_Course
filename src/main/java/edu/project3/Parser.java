@@ -1,13 +1,19 @@
 package edu.project3;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import static edu.project3.Analysis.averageResponseSize;
 import static edu.project3.Analysis.requestedCodes;
 import static edu.project3.Analysis.requestedResources;
@@ -49,7 +55,21 @@ public class Parser {
             System.out.println(el + " " + codes.get(el));
         }
         generateMarkdownReportGeneral(logs);
-        generateMarkdownReportResources(logs);
+        //generateMarkdownReportResources(logs);
+    }
+
+    public static String[] parseFile(String path){
+        try (BufferedReader reader = Files.newBufferedReader(Path.of(path));) {
+            List<String> res = new ArrayList<>();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                res.add(line);
+            }
+            return res.toArray(new String[0]);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public static String[] parseURL(String URL) {
