@@ -24,6 +24,7 @@ public class Analysis {
             .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
     }
 
+    @SuppressWarnings("MagicNumber")
     public static Map<Integer, Long> requestedCodes(String [] logs) {
         return Arrays.stream(logs)
             .map(el -> {

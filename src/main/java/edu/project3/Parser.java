@@ -11,6 +11,7 @@ import java.time.temporal.ChronoUnit;
 import static edu.project3.Analysis.averageResponseSize;
 import static edu.project3.Analysis.requestedCodes;
 import static edu.project3.Analysis.requestedResources;
+import static edu.project3.ReportGenerator.generateMarkdownReportGeneral;
 
 public class Parser {
     private static final int EXPECTATION_TIME = 20;
@@ -46,6 +47,7 @@ public class Parser {
             codes.keySet()) {
             System.out.println(el + " " + codes.get(el));
         }
+        generateMarkdownReportGeneral(logs);
     }
 
     public static String [] parseURL(String URL) {
