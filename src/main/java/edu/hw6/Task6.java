@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Task6 {
+    private Task6() {
+    }
+
     private static final int MIN_PORT = 0;
     private static final int MAX_PORT = 49151;
 
@@ -42,6 +45,7 @@ public class Task6 {
         return ports;
     }
 
+    @SuppressWarnings("MagicNumber")
     private static Map<Integer, String> generateApplicationMap() {
         Map<Integer, String> map = new HashMap<>();
         map.put(135, "EPMAP");
@@ -59,6 +63,7 @@ public class Task6 {
         return map;
     }
 
+    @SuppressWarnings("MagicNumber")
     public static List<String[]> findBusyPortsWithInfo() {
         List<Integer> ports = null;
         Map<Integer, String> map = null;

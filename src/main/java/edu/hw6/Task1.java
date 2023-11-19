@@ -2,11 +2,7 @@ package edu.hw6;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,7 +20,7 @@ public class Task1 {
         private int size;
         private Path path;
 
-        public DiskMap(Path path) {
+        DiskMap(Path path) {
             this.path = path;
             this.size = 0;
         }
@@ -59,9 +55,9 @@ public class Task1 {
             try (BufferedReader br = new BufferedReader(new FileReader(path.toString()))) {
                 String line;
                 while ((line = br.readLine()) != null) {
-                    var KeyAndValue = line.split(":", 2);
-                    if (KeyAndValue[0].equals(key)) {
-                        return KeyAndValue[1];
+                    var keyAndValue = line.split(":", 2);
+                    if (keyAndValue[0].equals(key)) {
+                        return keyAndValue[1];
                     }
                 }
             } catch (IOException e) {
@@ -93,7 +89,7 @@ public class Task1 {
         public String remove(Object key) {
             Map<String, String> map = new HashMap<>();
             String returnValue = get(key);
-            if(returnValue == null) {
+            if (returnValue == null) {
                 return null;
             }
             try (BufferedReader br = new BufferedReader(new FileReader(path.toString()))) {
@@ -117,7 +113,7 @@ public class Task1 {
 
         @Override
         public void putAll(@NotNull Map<? extends String, ? extends String> m) {
-            for(var key : m.keySet()) {
+            for (var key : m.keySet()) {
                 put(key, m.get(key));
             }
         }
@@ -143,8 +139,8 @@ public class Task1 {
             try (BufferedReader br = new BufferedReader(new FileReader(path.toString()))) {
                 String line;
                 while ((line = br.readLine()) != null) {
-                    var KeyAndValue = line.split(":", 2);
-                    result.add(KeyAndValue[0]);
+                    var keyAndValue = line.split(":", 2);
+                    result.add(keyAndValue[0]);
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -159,8 +155,8 @@ public class Task1 {
             try (BufferedReader br = new BufferedReader(new FileReader(path.toString()))) {
                 String line;
                 while ((line = br.readLine()) != null) {
-                    var KeyAndValue = line.split(":", 2);
-                    result.add(KeyAndValue[1]);
+                    var keyAndValue = line.split(":", 2);
+                    result.add(keyAndValue[1]);
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);

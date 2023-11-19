@@ -13,11 +13,19 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class Task5 {
+    private Task5() {
+    }
+
     class HackerNews {
+        private HackerNews() {
+        }
+
+        private static final int EXPECTATION_TIME = 10;
+
         public static String news(long id) {
             String link = "https://hacker-news.firebaseio.com/v0/item/" + id + ".json";
             HttpClient client = HttpClient.newBuilder()
-                .connectTimeout(Duration.ofSeconds(20))
+                .connectTimeout(Duration.ofSeconds(EXPECTATION_TIME))
                 .build();
 
             HttpRequest request = null;
@@ -25,7 +33,7 @@ public class Task5 {
                 request = HttpRequest.newBuilder()
                     .uri(new URI(link))
                     .GET()
-                    .timeout(Duration.of(10, ChronoUnit.SECONDS))
+                    .timeout(Duration.of(EXPECTATION_TIME, ChronoUnit.SECONDS))
                     .build();
             } catch (URISyntaxException e) {
                 throw new RuntimeException(e);
@@ -48,7 +56,7 @@ public class Task5 {
 
         public static long[] hackerNewsTopStories() {
             HttpClient client = HttpClient.newBuilder()
-                .connectTimeout(Duration.ofSeconds(20))
+                .connectTimeout(Duration.ofSeconds(EXPECTATION_TIME))
                 .build();
 
             HttpRequest request = null;
@@ -56,7 +64,7 @@ public class Task5 {
                 request = HttpRequest.newBuilder()
                     .uri(new URI("https://hacker-news.firebaseio.com/v0/topstories.json"))
                     .GET()
-                    .timeout(Duration.of(10, ChronoUnit.SECONDS))
+                    .timeout(Duration.of(EXPECTATION_TIME, ChronoUnit.SECONDS))
                     .build();
             } catch (URISyntaxException e) {
                 throw new RuntimeException(e);
@@ -71,16 +79,16 @@ public class Task5 {
 
             return convertToLongArray(response);
         }
-    }
 
-    private static long[] convertToLongArray(HttpResponse<String> response) {
-        int respLength = response.body().length();
-        long[] result =
-            Stream.of(response.body()
-                    .substring(1, respLength - 1)
-                    .split(","))
-                .mapToLong(Long::parseLong)
-                .toArray();
-        return result;
+        private static long[] convertToLongArray(HttpResponse<String> response) {
+            int respLength = response.body().length();
+            long[] result =
+                Stream.of(response.body()
+                        .substring(1, respLength - 1)
+                        .split(","))
+                    .mapToLong(Long::parseLong)
+                    .toArray();
+            return result;
+        }
     }
 }
