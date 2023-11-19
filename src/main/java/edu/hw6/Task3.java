@@ -9,9 +9,8 @@ public class Task3 {
     private Task3() {
     }
 
-    public static AbstractFilter regularFile = Files::isRegularFile;
-    public static AbstractFilter readable = Files::isReadable;
-    public static AbstractFilter globMatchesTxt = (Path p) -> (p.getFileName().toString().matches(".txt$"));
+    public static AbstractFilter writable = Files::isWritable;
+    public static AbstractFilter globMatchesTxt = (Path p) -> (p.getFileName().toString().matches(".*txt$"));
     public static AbstractFilter regexContainsDigit =
         (Path p) -> (p.getFileName().toString().matches(".*[0-9].*"));
     @SuppressWarnings("MagicNumber")

@@ -1,5 +1,6 @@
 package edu.hw6;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,14 +15,13 @@ public class Task2 {
     public static String generateCopyFilePathString(Path path) {
         String name = String.valueOf(path.getFileName());
         String parent = String.valueOf(path.getParent());
-        //StringBuilder pathWithoutTxt = new StringBuilder(parent + "\\");
         StringBuilder nameWithoutTxt = new StringBuilder();
         nameWithoutTxt.append(name, 0, name.length() - ".txt".length());
-        Path pathCopy = Paths.get(parent + "\\" + nameWithoutTxt + " — copy.txt");
+        Path pathCopy = Paths.get(parent + File.separator + nameWithoutTxt + " — copy.txt");
         if (Files.exists(pathCopy)) {
             int i = 2;
             while (Files.exists(pathCopy)) {
-                pathCopy = Paths.get(parent + "\\" + nameWithoutTxt + " — copy(" + i + ").txt");
+                pathCopy = Paths.get(parent + File.separator + nameWithoutTxt + " — copy(" + i + ").txt");
                 i++;
             }
         }
@@ -29,6 +29,5 @@ public class Task2 {
     }
 
     private Task2() {
-
     }
 }
