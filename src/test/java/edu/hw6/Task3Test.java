@@ -47,8 +47,7 @@ public class Task3Test {
             "NameTest.txt",
             "Secret — copy(2).txt",
             "Secret — copy.txt",
-            "Secret.txt",
-            "Test_Project (2).pdf"
+            "Secret.txt"
         );
         Path dir = Path.of("src" + File.separator + "test" + File.separator + "java" +
             File.separator + "edu" + File.separator + "hw6" + File.separator + "Task3Files");
