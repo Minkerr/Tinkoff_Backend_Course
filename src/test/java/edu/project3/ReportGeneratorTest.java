@@ -2,6 +2,7 @@ package edu.project3;
 
 import org.junit.jupiter.api.Test;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,7 +21,9 @@ public class ReportGeneratorTest {
             + "|:-:|-:|\n"
             + "|Response Quantity|3|\n"
             + "|Average Response Size|130|\n";
-        String[] logs = parseFile("src\\main\\java\\edu\\project3\\input\\logs.txt");
+        String[] logs = parseFile("src" + File.separator + "main" + File.separator
+            + "java" + File.separator + "edu" + File.separator +  "project3" + File.separator + "input"
+            + File.separator + "logs.txt");
 
         var act = generateMarkdownReportGeneral(logs);
         assertThat(act).isEqualTo(exp);
