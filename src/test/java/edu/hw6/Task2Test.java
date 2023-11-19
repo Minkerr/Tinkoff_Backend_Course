@@ -10,6 +10,7 @@ import static edu.hw6.Task2.generateCopyFilePathString;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task2Test {
+
     @Test
     void generateCopyFilePathString_shouldGenerateNameWithNumberIfCopyAlreadyExist() {
         //arrange

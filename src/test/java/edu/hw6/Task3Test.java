@@ -2,6 +2,7 @@ package edu.hw6;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -18,7 +19,8 @@ public class Task3Test {
         //DirectoryStream.Filter<Path> filter = regularFile.and(readable).and(regexContainsDigit);
         DirectoryStream.Filter<Path> filter1 = magicNumber089;
         List<String> exp = List.of("formula.png");
-        Path dir = Path.of("src\\test\\java\\edu\\hw6\\Task3Files");
+        Path dir = Path.of("src" + File.separator + "test" + File.separator + "java" +
+            File.separator + "edu" + File.separator + "hw6" + File.separator + "Task3Files");
 
         List<String> act = new ArrayList<>();
         try (DirectoryStream<Path> entries = Files.newDirectoryStream(dir, filter1)) {
