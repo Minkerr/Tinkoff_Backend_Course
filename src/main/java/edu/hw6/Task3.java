@@ -18,7 +18,7 @@ public class Task3 {
     public static AbstractFilter largerThan100000 = (Path p) -> (Files.size(p) > 100000);
 
     @SuppressWarnings("MagicNumber")
-    public static AbstractFilter magicNumber =
+    public static AbstractFilter magicNumber089 =
         (Path p) -> (Files.readAllBytes(p).length != 0 && Files.readAllBytes(p)[0] == (byte) 0x89);
 
     @FunctionalInterface
