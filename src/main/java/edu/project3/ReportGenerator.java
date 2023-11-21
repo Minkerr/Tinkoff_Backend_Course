@@ -32,7 +32,7 @@ public class ReportGenerator {
         StringBuilder table = new StringBuilder("|Code|Quantity|\n");
         table.append("|:-:|-:|\n");
         var resources = requestedCodes(logs);
-        for (var log : resources.keySet()) {
+        for (Integer log : resources.keySet()) {
             table.append("|").append(log).append("|").append(resources.get(log)).append("|\n");
         }
         try {
@@ -48,7 +48,7 @@ public class ReportGenerator {
         StringBuilder table = new StringBuilder("|Resource|Quantity|\n");
         table.append("|:-:|-:|\n");
         var resources = requestedResources(logs);
-        for (var log : resources.keySet()) {
+        for (String log : resources.keySet()) {
             table.append("|").append(log).append("|").append(resources.get(log)).append("|\n");
         }
         try {
@@ -60,3 +60,4 @@ public class ReportGenerator {
     }
 
 }
+
