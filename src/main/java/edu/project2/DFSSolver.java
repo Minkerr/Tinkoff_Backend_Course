@@ -20,10 +20,10 @@ public class DFSSolver implements Solver {
         return solution;
     }
 
-    private void dfs(Coordinate v, Cell[][] grid, boolean[][] used, Coordinate[][] prev) {
-        final int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}}; //directions
-        int row = v.row();
-        int col = v.col();
+    private void dfs(Coordinate start, Cell[][] grid, boolean[][] used, Coordinate[][] prev) {
+        final int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        int row = start.row();
+        int col = start.col();
         used[row][col] = true;
         for (int[] dir : directions) {
             if (!used[row + dir[0]][col + dir[1]]) {
@@ -39,14 +39,14 @@ public class DFSSolver implements Solver {
         int y = end.col();
         while (!((x == start.row()) && (y == start.col()))) {
             solution.add(new Coordinate(x, y));
-            int newX = prev[x][y].row();
-            int newY = prev[x][y].col();
+            int newX = prev[x][y].row(); // These temporary variables are needed because
+            int newY = prev[x][y].col(); // x and y are involved in the rewrite
             x = newX;
             y = newY;
         }
-        solution.add(new Coordinate(1, 1));
+        solution.add(start); //prev doesn't contain start coordinate. So we have to add it.
         Collections.reverse(solution);
-        return solution; //reconstruct solution with prev array help
+        return solution;
     }
 
     private void initUsedWithWalls(boolean[][] used, Cell[][] grid, int height, int width) {

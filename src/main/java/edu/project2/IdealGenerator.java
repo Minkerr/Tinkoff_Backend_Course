@@ -1,6 +1,6 @@
 package edu.project2;
 
-public class IdealGenerator implements Generator {
+public class IdealGenerator extends Generator {
     private final int wallGenerationAttemptCoefficient = 100;
 
     @Override
@@ -8,7 +8,7 @@ public class IdealGenerator implements Generator {
         Cell[][] grid = generateEmptyMazeWithExternalWall(height, width);
         buildUpTheMazeByAddingRandomWalls(grid, height, width);
         addExtraWallsIfPossible(grid, height, width);
-        return new Maze(height, width, grid);
+        return new Maze(grid);
     }
 
     private void buildUpTheMazeByAddingRandomWalls(Cell[][] grid, int height, int width) {
@@ -19,5 +19,9 @@ public class IdealGenerator implements Generator {
                 grid[row][col] = new Cell(row, col, Cell.Type.WALL);
             }
         }
+    }
+
+    private int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
     }
 }

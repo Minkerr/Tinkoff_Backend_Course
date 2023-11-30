@@ -1,6 +1,6 @@
 package edu.project2;
 
-public class RandomGenerator implements Generator {
+public class RandomGenerator extends Generator {
     private final int wallGenerationAttemptCoefficient = 100;
 
     @Override
@@ -8,7 +8,7 @@ public class RandomGenerator implements Generator {
         Cell[][] grid = generateEmptyMazeWithExternalWall(height, width);
         buildUpTheMazeByAddingRandomWalls(grid, height, width);
         addExtraWallsIfPossible(grid, height, width);
-        return new Maze(height, width, grid);
+        return new Maze(grid);
     }
 
     private void buildUpTheMazeByAddingRandomWalls(Cell[][] grid, int height, int width) {
@@ -31,5 +31,9 @@ public class RandomGenerator implements Generator {
         boolean top = grid[row - 1][col].type() == Cell.Type.PASSAGE;
         boolean topRight = grid[row - 1][col + 1].type() == Cell.Type.PASSAGE;
         return right && bottomRight && bottom && bottomLeft && left && topLeft && top && topRight;
+    }
+
+    private int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
     }
 }

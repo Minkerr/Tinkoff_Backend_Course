@@ -13,24 +13,28 @@ public class Project2Test {
         Maze randonMaze = randomGenerator.generate(20, 40);
         ConsoleRenderer renderer = new ConsoleRenderer();
 
-        DFSSolver DFSsolver = new DFSSolver();
-        BFSSolver BFSsolver = new BFSSolver();
+        DFSSolver dfsSolver = new DFSSolver();
+        BFSSolver bfsSolver = new BFSSolver();
 
-        List<Coordinate> DFSsolutionIdeal = DFSsolver.solve(idealMaze,
-            new Coordinate(1,1), new Coordinate(1,idealMaze.getWidth() - 2));
-        System.out.println(renderer.render(idealMaze, DFSsolutionIdeal));
+        List<Coordinate> dfsSolutionIdeal = dfsSolver.solve(idealMaze,
+            new Coordinate(1, 1), new Coordinate(1, idealMaze.getWidth() - 2)
+        );
+        System.out.println(renderer.render(idealMaze, dfsSolutionIdeal));
 
-        List<Coordinate> BFSsolutionIdeal = BFSsolver.solve(idealMaze,
-            new Coordinate(1,1), new Coordinate(1,idealMaze.getWidth() - 2));
-        System.out.println(renderer.render(idealMaze, BFSsolutionIdeal));
+        List<Coordinate> bfsSolutionIdeal = bfsSolver.solve(idealMaze,
+            new Coordinate(1, 1), new Coordinate(1, idealMaze.getWidth() - 2)
+        );
+        System.out.println(renderer.render(idealMaze, bfsSolutionIdeal));
 
-        List<Coordinate> DFSsolutionRandom = DFSsolver.solve(randonMaze,
-            new Coordinate(1,1), new Coordinate(1,randonMaze.getWidth() - 2));
-        System.out.println(renderer.render(randonMaze, DFSsolutionRandom));
+        List<Coordinate> dfsSolutionRandom = dfsSolver.solve(randonMaze,
+            new Coordinate(1, 1), new Coordinate(1, randonMaze.getWidth() - 2)
+        );
+        System.out.println(renderer.render(randonMaze, dfsSolutionRandom));
 
-        List<Coordinate> BFSsolutionRandom = BFSsolver.solve(randonMaze,
-            new Coordinate(1,1), new Coordinate(1,randonMaze.getWidth() - 2));
-        System.out.println(renderer.render(randonMaze, BFSsolutionRandom));
+        List<Coordinate> bfsSolutionRandom = bfsSolver.solve(randonMaze,
+            new Coordinate(1, 1), new Coordinate(1, randonMaze.getWidth() - 2)
+        );
+        System.out.println(renderer.render(randonMaze, bfsSolutionRandom));
 
     }
 
@@ -39,33 +43,33 @@ public class Project2Test {
         //arrange
         String exp = "#######\n# #   #\n#   # #\n#######\n";
         //act
-        Cell[] secondRow = new Cell[]{
-            new Cell(1,0, Cell.Type.WALL),
-            new Cell(1,1, Cell.Type.PASSAGE),
-            new Cell(1,2, Cell.Type.WALL),
-            new Cell(1,3, Cell.Type.PASSAGE),
-            new Cell(1,4, Cell.Type.PASSAGE),
-            new Cell(1,5, Cell.Type.PASSAGE),
-            new Cell(1,6, Cell.Type.WALL),};
-        Cell[] thirdRow = new Cell[]{
-            new Cell(2,0, Cell.Type.WALL),
-            new Cell(2,1, Cell.Type.PASSAGE),
-            new Cell(2,2, Cell.Type.PASSAGE),
-            new Cell(2,3, Cell.Type.PASSAGE),
-            new Cell(2,4, Cell.Type.WALL),
-            new Cell(2,5, Cell.Type.PASSAGE),
-            new Cell(2,6, Cell.Type.WALL),};
-        Cell[] edgeRow = new Cell[]{
-            new Cell(3,0, Cell.Type.WALL),
-            new Cell(3,1, Cell.Type.WALL),
-            new Cell(3,2, Cell.Type.WALL),
-            new Cell(3,3, Cell.Type.WALL),
-            new Cell(3,4, Cell.Type.WALL),
-            new Cell(3,5, Cell.Type.WALL),
-            new Cell(3,6, Cell.Type.WALL),};
-        Cell [][] grid = {edgeRow, secondRow, thirdRow, edgeRow};
+        Cell[] secondRow = new Cell[] {
+            new Cell(1, 0, Cell.Type.WALL),
+            new Cell(1, 1, Cell.Type.PASSAGE),
+            new Cell(1, 2, Cell.Type.WALL),
+            new Cell(1, 3, Cell.Type.PASSAGE),
+            new Cell(1, 4, Cell.Type.PASSAGE),
+            new Cell(1, 5, Cell.Type.PASSAGE),
+            new Cell(1, 6, Cell.Type.WALL),};
+        Cell[] thirdRow = new Cell[] {
+            new Cell(2, 0, Cell.Type.WALL),
+            new Cell(2, 1, Cell.Type.PASSAGE),
+            new Cell(2, 2, Cell.Type.PASSAGE),
+            new Cell(2, 3, Cell.Type.PASSAGE),
+            new Cell(2, 4, Cell.Type.WALL),
+            new Cell(2, 5, Cell.Type.PASSAGE),
+            new Cell(2, 6, Cell.Type.WALL),};
+        Cell[] edgeRow = new Cell[] {
+            new Cell(3, 0, Cell.Type.WALL),
+            new Cell(3, 1, Cell.Type.WALL),
+            new Cell(3, 2, Cell.Type.WALL),
+            new Cell(3, 3, Cell.Type.WALL),
+            new Cell(3, 4, Cell.Type.WALL),
+            new Cell(3, 5, Cell.Type.WALL),
+            new Cell(3, 6, Cell.Type.WALL),};
+        Cell[][] grid = {edgeRow, secondRow, thirdRow, edgeRow};
         ConsoleRenderer renderer = new ConsoleRenderer();
-        String act = renderer.render(new Maze( 4, 7, grid));
+        String act = renderer.render(new Maze(grid));
         //assert
         assertThat(act).isEqualTo(exp);
     }
@@ -75,33 +79,33 @@ public class Project2Test {
         //arrange
         String exp = "#######\n#•#•••#\n#•••#•#\n#######\n";
         //act
-        Cell[] secondRow = new Cell[]{
-            new Cell(1,0, Cell.Type.WALL),
-            new Cell(1,1, Cell.Type.PASSAGE),
-            new Cell(1,2, Cell.Type.WALL),
-            new Cell(1,3, Cell.Type.PASSAGE),
-            new Cell(1,4, Cell.Type.PASSAGE),
-            new Cell(1,5, Cell.Type.PASSAGE),
-            new Cell(1,6, Cell.Type.WALL),};
-        Cell[] thirdRow = new Cell[]{
-            new Cell(2,0, Cell.Type.WALL),
-            new Cell(2,1, Cell.Type.PASSAGE),
-            new Cell(2,2, Cell.Type.PASSAGE),
-            new Cell(2,3, Cell.Type.PASSAGE),
-            new Cell(2,4, Cell.Type.WALL),
-            new Cell(2,5, Cell.Type.PASSAGE),
-            new Cell(2,6, Cell.Type.WALL),};
-        Cell[] edgeRow = new Cell[]{
-            new Cell(3,0, Cell.Type.WALL),
-            new Cell(3,1, Cell.Type.WALL),
-            new Cell(3,2, Cell.Type.WALL),
-            new Cell(3,3, Cell.Type.WALL),
-            new Cell(3,4, Cell.Type.WALL),
-            new Cell(3,5, Cell.Type.WALL),
-            new Cell(3,6, Cell.Type.WALL),};
-        Cell [][] grid = {edgeRow, secondRow, thirdRow, edgeRow};
+        Cell[] secondRow = new Cell[] {
+            new Cell(1, 0, Cell.Type.WALL),
+            new Cell(1, 1, Cell.Type.PASSAGE),
+            new Cell(1, 2, Cell.Type.WALL),
+            new Cell(1, 3, Cell.Type.PASSAGE),
+            new Cell(1, 4, Cell.Type.PASSAGE),
+            new Cell(1, 5, Cell.Type.PASSAGE),
+            new Cell(1, 6, Cell.Type.WALL),};
+        Cell[] thirdRow = new Cell[] {
+            new Cell(2, 0, Cell.Type.WALL),
+            new Cell(2, 1, Cell.Type.PASSAGE),
+            new Cell(2, 2, Cell.Type.PASSAGE),
+            new Cell(2, 3, Cell.Type.PASSAGE),
+            new Cell(2, 4, Cell.Type.WALL),
+            new Cell(2, 5, Cell.Type.PASSAGE),
+            new Cell(2, 6, Cell.Type.WALL),};
+        Cell[] edgeRow = new Cell[] {
+            new Cell(3, 0, Cell.Type.WALL),
+            new Cell(3, 1, Cell.Type.WALL),
+            new Cell(3, 2, Cell.Type.WALL),
+            new Cell(3, 3, Cell.Type.WALL),
+            new Cell(3, 4, Cell.Type.WALL),
+            new Cell(3, 5, Cell.Type.WALL),
+            new Cell(3, 6, Cell.Type.WALL),};
+        Cell[][] grid = {edgeRow, secondRow, thirdRow, edgeRow};
         ConsoleRenderer renderer = new ConsoleRenderer();
-        Maze maze = new Maze( 4, 7, grid);
+        Maze maze = new Maze(grid);
         DFSSolver solver = new DFSSolver();
         Coordinate start = new Coordinate(1, 1);
         Coordinate end = new Coordinate(2, 5);

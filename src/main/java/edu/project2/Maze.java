@@ -1,22 +1,18 @@
 package edu.project2;
 
 public final class Maze {
-    private final int height;
-    private final int width;
     private final Cell[][] grid;
 
-    public Maze(int height, int width, Cell[][] grid) {
-        this.height = height;
-        this.width = width;
+    public Maze(Cell[][] grid) {
         this.grid = grid;
     }
 
     public int getHeight() {
-        return height;
+        return grid.length;
     }
 
     public int getWidth() {
-        return width;
+        return grid[0].length;
     }
 
     public Cell[][] getGrid() {

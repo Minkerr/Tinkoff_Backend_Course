@@ -22,11 +22,11 @@ public class BFSSolver implements Solver {
         return solution;
     }
 
-    private void bfs(Coordinate v, Cell[][] grid, boolean[][] used, Coordinate[][] prev) {
-        final int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}}; //directions
+    private void bfs(Coordinate start, Cell[][] grid, boolean[][] used, Coordinate[][] prev) {
+        final int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
         Queue<Coordinate> queue = new LinkedList<>();
-        int row = v.row();
-        int col = v.col();
+        int row = start.row();
+        int col = start.col();
         used[row][col] = true;
         queue.add(new Coordinate(row, col));
         while (!queue.isEmpty()) {
@@ -49,14 +49,14 @@ public class BFSSolver implements Solver {
         int y = end.col();
         while (!((x == start.row()) && (y == start.col()))) {
             solution.add(new Coordinate(x, y));
-            int newX = prev[x][y].row();
-            int newY = prev[x][y].col();
+            int newX = prev[x][y].row(); // These temporary variables are needed because
+            int newY = prev[x][y].col(); // x and y are involved in the rewrite
             x = newX;
             y = newY;
         }
-        solution.add(new Coordinate(1, 1));
+        solution.add(start); //prev doesn't contain start coordinate. So we have to add it.
         Collections.reverse(solution);
-        return solution; //reconstruct solution with prev array help
+        return solution;
     }
 
     private void initUsedWithWalls(boolean[][] used, Cell[][] grid, int height, int width) {

@@ -1,9 +1,9 @@
 package edu.project2;
 
-public interface Generator {
-    Maze generate(int height, int width);
+abstract class Generator {
+    abstract Maze generate(int height, int width);
 
-    default Cell[][] generateEmptyMazeWithExternalWall(int height, int width) {
+    protected Cell[][] generateEmptyMazeWithExternalWall(int height, int width) {
         Cell[][] grid = new Cell[height][width];
         for (int i = 0; i < height; i++) {
             grid[i][0] = new Cell(i, 0, Cell.Type.WALL);
@@ -21,12 +21,8 @@ public interface Generator {
         return grid;
     }
 
-    default int getRandomNumber(int min, int max) {
-        return (int) ((Math.random() * (max - min)) + min);
-    }
-
     @SuppressWarnings("CyclomaticComplexity")
-    default boolean checkThatWallAreOnOneSide(Cell[][] grid, int row, int col) {
+    protected boolean checkThatWallAreOnOneSide(Cell[][] grid, int row, int col) {
         boolean right = grid[row][col + 1].type() == Cell.Type.PASSAGE;
         boolean bottomRight = grid[row + 1][col + 1].type() == Cell.Type.PASSAGE;
         boolean bottom = grid[row + 1][col].type() == Cell.Type.PASSAGE;
@@ -52,7 +48,7 @@ public interface Generator {
         return result;
     }
 
-    default void addExtraWallsIfPossible(Cell[][] grid, int height, int width) {
+    protected void addExtraWallsIfPossible(Cell[][] grid, int height, int width) {
         for (int i = 1; i < height - 1; i++) {
             for (int j = 1; j < width - 1; j++) {
                 if (checkThatWallAreOnOneSide(grid, i, j)) {
