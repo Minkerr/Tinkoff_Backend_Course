@@ -2,6 +2,7 @@ package edu.hw5;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 
 public class Task3 {
@@ -15,9 +16,9 @@ public class Task3 {
         boolean isTomorrow = dateString.equals("tomorrow");
 
         Optional<LocalDate> result = Optional.empty();
-        DateTimeFormatter formatter = null;
         if (isFormWithSlash || isFormWithHyphen) {
-            formatter = determineExplicitFormFormatter(dateString);
+            DateTimeFormatter formatter = determineExplicitFormFormatter(dateString);
+            result = Optional.of(LocalDate.parse(dateString, formatter));
         } else if (isFormAgo) {
             int days = Integer.parseInt(dateString.split(" ")[0]);
             result = Optional.of(LocalDate.now().minusDays(days));
@@ -27,10 +28,6 @@ public class Task3 {
             result = Optional.of(LocalDate.now());
         } else if (isTomorrow) {
             result = Optional.of(LocalDate.now().plusDays(1));
-        }
-
-        if (formatter != null) {
-            result = Optional.of(LocalDate.parse(dateString, formatter));
         }
         return result;
     }
@@ -49,46 +46,27 @@ public class Task3 {
         String form11 = "d/MM/yyyy";
         String form12 = "d/M/yyyy";
 
-        boolean isForm1 = dateString.matches("([0-9]{4})-([0-9]{2})-([0-9]{2})");
-        boolean isForm2 = dateString.matches("([0-9]{4})-([0-9])-([0-9]{2})");
-        boolean isForm3 = dateString.matches("([0-9]{4})-([0-9]{2})-([0-9])");
-        boolean isForm4 = dateString.matches("([0-9]{4})-([0-9])-([0-9])");
-        boolean isForm5 = dateString.matches("([0-9]{2})/([0-9]{2})/([0-9]{2})");
-        boolean isForm6 = dateString.matches("([0-9]{2})/([0-9])/([0-9]{2})");
-        boolean isForm7 = dateString.matches("([0-9])/([0-9]{2})/([0-9]{2})");
-        boolean isForm8 = dateString.matches("([0-9])/([0-9])/([0-9]{2})");
-        boolean isForm9 = dateString.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})");
-        boolean isForm10 = dateString.matches("([0-9]{2})/([0-9])/([0-9]{4})");
-        boolean isForm11 = dateString.matches("([0-9])/([0-9]{2})/([0-9]{4})");
-        boolean isForm12 = dateString.matches("([0-9])/([0-9])/([0-9]{4})");
+        List<String[]> isItThisForm = List.of(
+            new String[] {form1, "([0-9]{4})-([0-9]{2})-([0-9]{2})"},
+            new String[] {form2, "([0-9]{4})-([0-9])-([0-9]{2})"},
+            new String[] {form3, "([0-9]{4})-([0-9]{2})-([0-9])"},
+            new String[] {form4, "([0-9]{4})-([0-9])-([0-9])"},
+            new String[] {form5, "([0-9]{2})/([0-9]{2})/([0-9]{2})"},
+            new String[] {form6, "([0-9]{2})/([0-9])/([0-9]{2})"},
+            new String[] {form7, "([0-9])/([0-9]{2})/([0-9]{2})"},
+            new String[] {form8, "([0-9])/([0-9])/([0-9]{2})"},
+            new String[] {form9, "([0-9]{2})/([0-9]{2})/([0-9]{4})"},
+            new String[] {form10, "([0-9]{2})/([0-9])/([0-9]{4})"},
+            new String[] {form11, "([0-9])/([0-9]{2})/([0-9]{4})"},
+            new String[] {form12, "([0-9])/([0-9])/([0-9]{4})"}
+        );
 
-        DateTimeFormatter formatter = null;
-        if (isForm1) {
-            formatter = DateTimeFormatter.ofPattern(form1);
-        } else if (isForm2) {
-            formatter = DateTimeFormatter.ofPattern(form2);
-        } else if (isForm3) {
-            formatter = DateTimeFormatter.ofPattern(form3);
-        } else if (isForm4) {
-            formatter = DateTimeFormatter.ofPattern(form4);
-        } else if (isForm5) {
-            formatter = DateTimeFormatter.ofPattern(form5);
-        } else if (isForm6) {
-            formatter = DateTimeFormatter.ofPattern(form6);
-        } else if (isForm7) {
-            formatter = DateTimeFormatter.ofPattern(form7);
-        } else if (isForm8) {
-            formatter = DateTimeFormatter.ofPattern(form8);
-        } else if (isForm9) {
-            formatter = DateTimeFormatter.ofPattern(form9);
-        } else if (isForm10) {
-            formatter = DateTimeFormatter.ofPattern(form10);
-        } else if (isForm11) {
-            formatter = DateTimeFormatter.ofPattern(form11);
-        } else if (isForm12) {
-            formatter = DateTimeFormatter.ofPattern(form12);
+        for (var pair : isItThisForm) {
+            if (dateString.matches(pair[1])) {
+                return DateTimeFormatter.ofPattern(pair[0]);
+            }
         }
-        return formatter;
+        return null;
     }
 
     private Task3() {

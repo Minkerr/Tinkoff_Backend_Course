@@ -2,7 +2,6 @@ package edu.hw5;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAdjuster;
@@ -15,7 +14,6 @@ public class Task2 {
 
     @SuppressWarnings("MagicNumber")
     public static List<LocalDate> findAllThirteenFridaysInTheYear(int year) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         List<LocalDate> list = new ArrayList<>();
         for (int month = 1; month <= 12; month++) {
             LocalDate date = LocalDate.of(year, month, 13);

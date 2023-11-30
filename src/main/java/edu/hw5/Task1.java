@@ -4,14 +4,14 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Set;
+import java.util.List;
 
 public final class Task1 {
     private Task1() {
     }
 
     @SuppressWarnings("MagicNumber")
-    public static String averageSessionDuration(Set<String> sessions) {
+    public static String averageSessionDuration(List<String> sessions) {
         long sum = 0;
         for (var session : sessions) {
             long durationInMinutes = calculateDurationInMinutes(session).toMinutes();
