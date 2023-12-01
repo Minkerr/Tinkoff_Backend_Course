@@ -21,18 +21,19 @@ import static edu.project3.ReportGenerator.generateMarkdownReportGeneral;
 public class Parser {
     private static final int EXPECTATION_TIME = 20;
 
-    @SuppressWarnings({"RegexpSinglelineJava", "MagicNumber"})
+    @SuppressWarnings({"RegexpSinglelineJava", "MagicNumber", "UncommentedMain", "InnerAssignment"})
     public static void main(String[] args) {
         String path = args[4];
         String from = "";
         String to = "";
         String format = "";
+        String trash = "";
         for (int i = 0; i < args.length; i++) {
             switch (args[i]) {
                 case "--from" -> from = args[i + 1];
                 case "--to" -> to = args[i + 1];
                 case "--format" -> format = args[i + 1];
-                //default -> ;
+                default -> trash = args[i + 1];
             }
         }
 
@@ -93,5 +94,8 @@ public class Parser {
         }
 
         return response.body().split("\n");
+    }
+
+    private Parser() {
     }
 }
