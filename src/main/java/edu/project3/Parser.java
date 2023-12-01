@@ -10,13 +10,15 @@ import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import static edu.project3.Analysis.averageResponseSize;
-import static edu.project3.Analysis.requestedCodes;
-import static edu.project3.Analysis.requestedResources;
-import static edu.project3.ReportGenerator.generateMarkdownReportGeneral;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import static edu.project3.ReportGenerator.generateMarkdownReportResources;
 
 public class Parser {
@@ -39,18 +41,24 @@ public class Parser {
         }
 
         String[] logs = parseFile("src\\main\\java\\edu\\project3\\input\\logs.txt");
-        System.out.println(logs.length);
         System.out.println(path);
-        var res = requestedResources(logs);
-        for (var el : res.keySet()) {
-            System.out.println(el + " " + res.get(el));
-        }
-        var codes = requestedCodes(logs);
-        for (var el : codes.keySet()) {
-            System.out.println(el + " " + codes.get(el));
-        }
-        //generateMarkdownReportGeneral(logs);
         generateMarkdownReportResources(logs);
+    }
+
+    public static String[] parseFileWithData(String path, OffsetDateTime from, OffsetDateTime to) {
+        String [] logs = parseFile(path);
+        String [] filteredLogs = Arrays.stream(logs)
+            .filter((s) -> {
+                Pattern pattern = Pattern.compile(".*\\[(.*)\\].*");
+                Matcher matcher = pattern.matcher(s);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy:HH:mm:ss Z",
+                    Locale.ENGLISH);
+                matcher.find();
+                OffsetDateTime date = OffsetDateTime.parse(matcher.group(1), formatter);
+                return date.isAfter(from) && date.isBefore(to);
+            })
+            .toArray(String[]::new);
+        return filteredLogs;
     }
 
     public static String[] parseFile(String path) {
