@@ -1,11 +1,12 @@
 [cols="1,1"]
 |===
-|Cell in column 1, row 1
-|Cell in column 2, row 1
+|Code
+|Quantity
 
-|Cell in column 1, row 2
-|Cell in column 2, row 2
+|GET /downloads/product_1 HTTP/1.1
+|1
 
-|Cell in column 1, row 3
-|Cell in column 2, row 3
+|GET /downloads/product_2 HTTP/1.1
+|2
+
 |===
