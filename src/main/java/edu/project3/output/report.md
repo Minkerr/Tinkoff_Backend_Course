@@ -1,4 +1,4 @@
 |Metrics|Value|
 |:-:|-:|
-|Response Quantity|51462|
-|Average Response Size|134|
+|Response Quantity|3|
+|Average Response Size|130|

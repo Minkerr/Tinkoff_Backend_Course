@@ -17,6 +17,7 @@ import static edu.project3.Analysis.averageResponseSize;
 import static edu.project3.Analysis.requestedCodes;
 import static edu.project3.Analysis.requestedResources;
 import static edu.project3.ReportGenerator.generateMarkdownReportGeneral;
+import static edu.project3.ReportGenerator.generateMarkdownReportResources;
 
 public class Parser {
     private static final int EXPECTATION_TIME = 20;
@@ -33,17 +34,13 @@ public class Parser {
                 case "--from" -> from = args[i + 1];
                 case "--to" -> to = args[i + 1];
                 case "--format" -> format = args[i + 1];
-                default -> trash = args[i + 1];
+                default -> trash = args[i];
             }
         }
 
-        String[] logs = parseURL(path);
+        String[] logs = parseFile("src\\main\\java\\edu\\project3\\input\\logs.txt");
         System.out.println(logs.length);
         System.out.println(path);
-        System.out.println(logs[2]);
-        System.out.println(logs[20]);
-        System.out.println(logs[22]);
-        System.out.println(averageResponseSize(logs));
         var res = requestedResources(logs);
         for (var el : res.keySet()) {
             System.out.println(el + " " + res.get(el));
@@ -52,8 +49,8 @@ public class Parser {
         for (var el : codes.keySet()) {
             System.out.println(el + " " + codes.get(el));
         }
-        generateMarkdownReportGeneral(logs);
-        //generateMarkdownReportResources(logs);
+        //generateMarkdownReportGeneral(logs);
+        generateMarkdownReportResources(logs);
     }
 
     public static String[] parseFile(String path) {
