@@ -46,13 +46,15 @@ public class Parser {
     }
 
     public static String[] parseFileWithData(String path, OffsetDateTime from, OffsetDateTime to) {
-        String [] logs = parseFile(path);
-        String [] filteredLogs = Arrays.stream(logs)
+        String[] logs = parseFile(path);
+        String[] filteredLogs = Arrays.stream(logs)
             .filter((s) -> {
                 Pattern pattern = Pattern.compile(".*\\[(.*)\\].*");
                 Matcher matcher = pattern.matcher(s);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy:HH:mm:ss Z",
-                    Locale.ENGLISH);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
+                    "dd/MMM/yyyy:HH:mm:ss Z",
+                    Locale.ENGLISH
+                );
                 matcher.find();
                 OffsetDateTime date = OffsetDateTime.parse(matcher.group(1), formatter);
                 return date.isAfter(from) && date.isBefore(to);
