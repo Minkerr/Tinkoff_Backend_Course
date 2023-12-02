@@ -41,7 +41,6 @@ public class Parser {
         }
 
         String[] logs = parseFile("src\\main\\java\\edu\\project3\\input\\logs.txt");
-        System.out.println(path);
         generateMarkdownReportResources(logs);
     }
 

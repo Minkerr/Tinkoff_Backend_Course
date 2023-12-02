@@ -1,6 +1,9 @@
 package edu.project3;
 
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,6 +21,38 @@ public class Analysis {
         return Arrays.stream(logs)
             .map(el -> {
                 Pattern pattern = Pattern.compile("] \"(.*?)\"");
+                Matcher matcher = pattern.matcher(el);
+                if (matcher.find()) {
+                    return matcher.group(1);
+                }
+                return "";
+            })
+            .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
+    }
+
+    public static Map<String, Long> requestedResourcesByDate(String[] logs) {
+        return Arrays.stream(logs)
+            .map(el -> {
+                Pattern pattern = Pattern.compile(".*\\[(.*)\\].*");
+                Matcher matcher = pattern.matcher(el);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
+                    "dd/MMM/yyyy:HH:mm:ss Z",
+                    Locale.ENGLISH
+                );
+                if (matcher.find()) {
+                    OffsetDateTime date = OffsetDateTime.parse(matcher.group(1), formatter);
+                    DateTimeFormatter outFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    return date.format(outFormatter);
+                }
+                return "";
+            })
+            .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
+    }
+
+    public static Map<String, Long> requestedResourcesByIP(String[] logs) {
+        return Arrays.stream(logs)
+            .map(el -> {
+                Pattern pattern = Pattern.compile("^(.*) - -.*");
                 Matcher matcher = pattern.matcher(el);
                 if (matcher.find()) {
                     return matcher.group(1);
