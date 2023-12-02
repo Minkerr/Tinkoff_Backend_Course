@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import static edu.project3.ReportGenerator.generateMarkdownReportResources;
 
 public class Parser {
     private static final int EXPECTATION_TIME = 20;
@@ -40,8 +39,8 @@ public class Parser {
             }
         }
 
-        String[] logs = parseFile("src\\main\\java\\edu\\project3\\input\\logs.txt");
-        generateMarkdownReportResources(logs);
+        //String[] logs = parseFile("src\\main\\java\\edu\\project3\\input\\logs.txt");
+        //generateMarkdownReportResources(logs);
     }
 
     public static String[] parseFileWithData(String path, OffsetDateTime from, OffsetDateTime to) {
