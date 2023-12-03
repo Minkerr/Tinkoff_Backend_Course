@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Task1Test {
     @Test
-    public void givenClient1_whenServerResponds_thenCorrect() throws IOException, InterruptedException {
+    public void server_shouldReturnQuoteForClient() throws IOException, InterruptedException {
         Server server = new Server();
         Thread serv = new Thread(() -> {
             try {
@@ -64,31 +64,5 @@ public class Task1Test {
             throw new RuntimeException(e);
         }
     }
-/*
-    @Test
-    public void givenClient_whenServerResponds_thenCorrect()
-        throws IOException, ExecutionException, InterruptedException {
-        Server server = new Server();
-        server.start(6666);
-
-        ExecutorService service = Executors.newFixedThreadPool(4);
-        Callable<String> task = () -> {
-            Client client = new Client();
-            client.startConnection("localhost", 6666);
-            String msg = client.sendMessage("personal");
-            client.stopConnection();
-            //System.out.println(Thread.currentThread().getName());
-            return msg;
-        };
-        for (int i = 0; i < 20; i++) {
-            int messageNumber = i;
-            Future result = service.submit(task);
-            assertThat(result.get()).isEqualTo("Don't get personal where there are none");
-        }
-
-        service.shutdown();
-        server.stop();
-    }
-*/
 }
 

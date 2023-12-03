@@ -17,7 +17,7 @@ public class Task2Test {
     }
 
     @Test
-    void pool_shouldCountNFibNumber() throws Exception {
+    void threadPool_shouldCountFibonacciNumber() throws Exception {
         //arrange
         List<Long> numbers = new ArrayList<>();
         //act
