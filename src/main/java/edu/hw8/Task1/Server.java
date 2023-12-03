@@ -1,19 +1,18 @@
 package edu.hw8.Task1;
 
-import java.net.*;
-import java.io.*;
-import java.nio.ByteBuffer;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server {
     private ServerSocket serverSocket;
-    private Socket clientSocket;
-    private PrintWriter out;
-    private BufferedReader in;
-    private final int PORT = 6666;
-    private ExecutorService threadPool = Executors.newFixedThreadPool(8);
-    private ByteBuffer buffer = ByteBuffer.allocate(256);
+    private final int port = 6666;
+    private final ExecutorService threadPool = Executors.newFixedThreadPool(8);
 
     private static String searchQuote(String word) {
         return switch (word) {
@@ -25,10 +24,10 @@ public class Server {
         };
     }
 
+    @SuppressWarnings("UncommentedMain")
     public static void main(String[] args) throws IOException {
         Server server = new Server();
-        server.start(6666);
-
+        server.start(server.port);
     }
 
     public void start(int port) throws IOException {
@@ -49,7 +48,7 @@ public class Server {
         private PrintWriter out;
         private BufferedReader in;
 
-        public Worker(Socket socket) {
+        private Worker(Socket socket) {
             this.clientSocket = socket;
         }
 
@@ -59,7 +58,6 @@ public class Server {
                 in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 String inputLine;
                 while ((inputLine = in.readLine()) != null) {
-                    System.out.println(inputLine);
                     if (inputLine.equals("!exit")) {
                         out.println("bye");
                         break;
