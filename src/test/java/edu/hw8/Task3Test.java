@@ -36,6 +36,9 @@ public class Task3Test {
         given.put("482c811da5d5b4bc6d497ffa98491e38", "a.s.ivanov");
         given.put("5f4dcc3b5aa765d61d8327deb882cf99", "k.p.maslov");
         given.put("098f6bcd4621d373cade4e832627b4f6", "t.t.testov");
+        given.put("ac9bfee113e7ab6889e53a00a2a18290", "m.p.drumov");
+        given.put("7d4309eb39c38fa9ab3cb72306c34fb4", "z.a.wildov");
+
         //act
         var act = passwordEncodingMultithread(given);
 

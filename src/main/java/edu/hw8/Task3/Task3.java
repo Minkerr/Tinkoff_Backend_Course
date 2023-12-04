@@ -13,7 +13,7 @@ public class Task3 {
     private Task3() {
     }
 
-    private static final int MAX_PASSWORD_LENGTH = 6;
+    private static final int MAX_PASSWORD_LENGTH = 4;
     private static final int THREAD_NUMBER = 8;
     private static final String START_PASSWORD = "999";
 
@@ -66,7 +66,7 @@ public class Task3 {
         Map<String, String> result = new HashMap<>();
         String element = START_PASSWORD;
 
-        while (element.length() < MAX_PASSWORD_LENGTH) {
+        while (element.length() <= MAX_PASSWORD_LENGTH) {
             element = nextPassword(element);
             String codedString = stringToMD5(element);
             if (passwordMap.containsKey(codedString)) {
@@ -79,21 +79,22 @@ public class Task3 {
 
     public static Map<String, String> passwordEncodingMultithread(Map<String, String> passwordMap) {
         Map<String, String> result = new HashMap<>();
-        AtomicReference<String> element = new AtomicReference<>(START_PASSWORD);
 
-        Callable<String> task = () -> {
-            element.set(nextPassword(element.get()));
-            return element.toString();
-        };
+        AtomicReference<String> element = new AtomicReference<>(START_PASSWORD);
         ExecutorService service = Executors.newFixedThreadPool(THREAD_NUMBER);
 
-        while (element.get().length() < MAX_PASSWORD_LENGTH) {
-            Future future = service.submit(task);
-            String codedString = stringToMD5(element.get());
-            if (passwordMap.containsKey(codedString)) {
-                result.put(passwordMap.get(codedString), element.toString());
-            }
+        while (element.get().length() <= MAX_PASSWORD_LENGTH) {
+            service.execute(() -> {
+                String newElement;
+                element.set(nextPassword(element.get()));
+                newElement = element.get();
 
+                String codedString = stringToMD5(newElement);
+                if (passwordMap.containsKey(codedString)) {
+                    result.put(passwordMap.get(codedString), newElement);
+                    passwordMap.remove(codedString);
+                }
+            });
         }
         service.shutdown();
         return result;

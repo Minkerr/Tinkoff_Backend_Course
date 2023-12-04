@@ -3,6 +3,7 @@ package edu.hw8;
 import edu.hw8.Task2.FixedThreadPool;
 import edu.hw8.Task2.ThreadPool;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -29,6 +30,7 @@ public class Task2Test {
                 threadPool.execute(() -> numbers.add(calculateFibonacci(n)));
             }
         }
+        Collections.sort(numbers);
         //assert
         assertThat(numbers.get(31)).isEqualTo(numbers.get(30) + numbers.get(29));
 
