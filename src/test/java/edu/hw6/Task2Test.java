@@ -35,13 +35,15 @@ public class Task2Test {
 
 
  */
-    /*
+
     @Test
     void cloneFile_shouldCreateCopyWithSpecialName() throws IOException {
         //arrange
-        Path path = Path.of("src\\main\\java\\edu\\hw6\\Task2Files\\Secret.txt");
-        String copyName = generateCopyFilePathString(path);
-        Path copyPath = Path.of(path.getParent() + "\\" + copyName);
+        Path path = Path.of("src" + File.separator + "main" + File.separator + "java" + File.separator +
+            "edu" + File.separator + "hw6" + File.separator + "Task2Files" + File.separator + "Secret.txt");
+        Path copyPath = Path.of("src" + File.separator + "main" + File.separator + "java" + File.separator +
+            "edu" + File.separator + "hw6" + File.separator + "Task2Files" + File.separator +
+            "Secret — copy(3).txt");
         //act
         cloneFile(path);
         boolean fileIsExist = Files.exists(copyPath);
@@ -55,5 +57,4 @@ public class Task2Test {
         }
     }
 
-     */
 }
