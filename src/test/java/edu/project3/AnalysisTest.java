@@ -11,7 +11,6 @@ import static edu.project3.Analysis.requestedResources;
 import static edu.project3.Analysis.requestedResourcesByDate;
 import static edu.project3.Analysis.requestedResourcesByIP;
 import static edu.project3.Parser.parseFile;
-import static edu.project3.ReportGenerator.generateMarkdownReportCodes;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class AnalysisTest {

@@ -21,7 +21,7 @@ public class ReportGenerator {
     private static final String END_OF_TABLE_ADOC = "|===\n";
     private static final String SEPARATOR_ADOC = "\n|";
 
-    public static String generateAdocReportGeneral(String[] logs) {
+    public static String generateAdocReportGeneralAndWriteToOutputFile(String[] logs) {
         Path path = Path.of(ADOC_OUTPUT_PATH);
         StringBuilder table = new StringBuilder("""
             [cols="1,1"]
@@ -42,7 +42,7 @@ public class ReportGenerator {
         return String.valueOf(table);
     }
 
-    public static String generateAdocReportCodes(String[] logs) {
+    public static String generateAdocReportCodesAndWriteToOutputFile(String[] logs) {
         Path path = Path.of(ADOC_OUTPUT_PATH);
         StringBuilder table = new StringBuilder("""
             [cols="1,1"]
@@ -64,7 +64,7 @@ public class ReportGenerator {
         return String.valueOf(table);
     }
 
-    public static String generateAdocReportResources(String[] logs) {
+    public static String generateAdocReportResourcesAndWriteToOutputFile(String[] logs) {
         Path path = Path.of(ADOC_OUTPUT_PATH);
         StringBuilder table = new StringBuilder("""
             [cols="1,1"]
@@ -86,7 +86,7 @@ public class ReportGenerator {
         return String.valueOf(table);
     }
 
-    public static String generateAdocReportResourcesByDate(String[] logs) {
+    public static String generateAdocReportResourcesByDateAndWriteToOutputFile(String[] logs) {
         Path path = Path.of(ADOC_OUTPUT_PATH);
         StringBuilder table = new StringBuilder("""
             [cols="1,1"]
@@ -108,7 +108,7 @@ public class ReportGenerator {
         return String.valueOf(table);
     }
 
-    public static String generateAdocReportResourcesByIP(String[] logs) {
+    public static String generateAdocReportResourcesByIPAndWriteToOutputFile(String[] logs) {
         Path path = Path.of(ADOC_OUTPUT_PATH);
         StringBuilder table = new StringBuilder("""
             [cols="1,1"]
@@ -130,7 +130,7 @@ public class ReportGenerator {
         return String.valueOf(table);
     }
 
-    public static String generateMarkdownReportGeneral(String[] logs) {
+    public static String generateMarkdownReportGeneralAndWriteToOutputFile(String[] logs) {
         Path path = Path.of(MARKDOWN_OUTPUT_PATH);
         StringBuilder table = new StringBuilder("|Metrics|Value|\n");
         table.append(TABLE_LINE);
@@ -145,7 +145,7 @@ public class ReportGenerator {
         return String.valueOf(table);
     }
 
-    public static String generateMarkdownReportCodes(String[] logs) {
+    public static String generateMarkdownReportCodesAndWriteToOutputFile(String[] logs) {
         Path path = Path.of(MARKDOWN_OUTPUT_PATH);
         StringBuilder table = new StringBuilder("|Code|Quantity|\n");
         table.append(TABLE_LINE);
@@ -161,7 +161,7 @@ public class ReportGenerator {
         return String.valueOf(table);
     }
 
-    public static String generateMarkdownReportResources(String[] logs) {
+    public static String generateMarkdownReportResourcesAndWriteToOutputFile(String[] logs) {
         Path path = Path.of(MARKDOWN_OUTPUT_PATH);
         StringBuilder table = new StringBuilder("|Resource|Quantity|\n");
         table.append(TABLE_LINE);
@@ -177,7 +177,7 @@ public class ReportGenerator {
         return String.valueOf(table);
     }
 
-    public static String generateMarkdownReportResourcesByDate(String[] logs) {
+    public static String generateMarkdownReportResourcesByDateAndWriteToOutputFile(String[] logs) {
         Path path = Path.of(MARKDOWN_OUTPUT_PATH);
         StringBuilder table = new StringBuilder("|Date|Quantity|\n");
         table.append(TABLE_LINE);
@@ -193,7 +193,7 @@ public class ReportGenerator {
         return String.valueOf(table);
     }
 
-    public static String generateMarkdownReportResourcesByIP(String[] logs) {
+    public static String generateMarkdownReportResourcesByIPAndWriteToOutputFile(String[] logs) {
         Path path = Path.of(MARKDOWN_OUTPUT_PATH);
         StringBuilder table = new StringBuilder("|IP|Quantity|\n");
         table.append(TABLE_LINE);

@@ -19,9 +19,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import static edu.project3.ReportGenerator.generateMarkdownReportResourcesAndWriteToOutputFile;
 
 public class Parser {
     private static final int EXPECTATION_TIME = 20;
+    private static final String REGEX_FOR_GETTING_DATE = ".*\\[(.*)\\].*";
+    private static final String DATE_FORMAT = "dd/MMM/yyyy:HH:mm:ss Z";
 
     @SuppressWarnings({"RegexpSinglelineJava", "MagicNumber", "UncommentedMain", "InnerAssignment"})
     public static void main(String[] args) {
@@ -38,24 +41,59 @@ public class Parser {
                 default -> trash = args[i];
             }
         }
-
-        //String[] logs = parseFile("src\\main\\java\\edu\\project3\\input\\logs.txt");
-        //generateMarkdownReportResources(logs);
+        String[] logs = parseFile("src\\main\\java\\edu\\project3\\input\\logs.txt");
+        generateMarkdownReportResourcesAndWriteToOutputFile(logs);
     }
 
-    public static String[] parseFileWithData(String path, OffsetDateTime from, OffsetDateTime to) {
+    public static String[] parseFileWithDate(String path, OffsetDateTime from, OffsetDateTime to) {
         String[] logs = parseFile(path);
         String[] filteredLogs = Arrays.stream(logs)
             .filter((s) -> {
-                Pattern pattern = Pattern.compile(".*\\[(.*)\\].*");
+                Pattern pattern = Pattern.compile(REGEX_FOR_GETTING_DATE);
                 Matcher matcher = pattern.matcher(s);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
-                    "dd/MMM/yyyy:HH:mm:ss Z",
+                    DATE_FORMAT,
                     Locale.ENGLISH
                 );
                 matcher.find();
                 OffsetDateTime date = OffsetDateTime.parse(matcher.group(1), formatter);
                 return date.isAfter(from) && date.isBefore(to);
+            })
+            .toArray(String[]::new);
+        return filteredLogs;
+    }
+
+    public static String[] parseFileFromDate(String path, OffsetDateTime from) {
+        String[] logs = parseFile(path);
+        String[] filteredLogs = Arrays.stream(logs)
+            .filter((s) -> {
+                Pattern pattern = Pattern.compile(REGEX_FOR_GETTING_DATE);
+                Matcher matcher = pattern.matcher(s);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
+                    DATE_FORMAT,
+                    Locale.ENGLISH
+                );
+                matcher.find();
+                OffsetDateTime date = OffsetDateTime.parse(matcher.group(1), formatter);
+                return date.isAfter(from);
+            })
+            .toArray(String[]::new);
+        return filteredLogs;
+    }
+
+    public static String[] parseFileToDate(String path, OffsetDateTime to) {
+        String[] logs = parseFile(path);
+        String[] filteredLogs = Arrays.stream(logs)
+            .filter((s) -> {
+                Pattern pattern = Pattern.compile(REGEX_FOR_GETTING_DATE);
+                Matcher matcher = pattern.matcher(s);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
+                    DATE_FORMAT,
+                    Locale.ENGLISH
+                );
+                matcher.find();
+                OffsetDateTime date = OffsetDateTime.parse(matcher.group(1), formatter);
+                return date.isBefore(to);
             })
             .toArray(String[]::new);
         return filteredLogs;
@@ -79,26 +117,17 @@ public class Parser {
         HttpClient client = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(EXPECTATION_TIME))
             .build();
-
-        HttpRequest request = null;
         try {
-            request = HttpRequest.newBuilder()
+            HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(url))
                 .GET()
                 .timeout(Duration.of(EXPECTATION_TIME, ChronoUnit.SECONDS))
                 .build();
-        } catch (URISyntaxException e) {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.body().split("\n");
+        } catch (URISyntaxException | IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
-
-        HttpResponse<String> response = null;
-        try {
-            response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException | InterruptedException ignored) {
-
-        }
-
-        return response.body().split("\n");
     }
 
     private Parser() {

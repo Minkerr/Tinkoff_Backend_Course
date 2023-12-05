@@ -3,16 +3,16 @@ package edu.project3;
 import java.io.File;
 import org.junit.jupiter.api.Test;
 import static edu.project3.Parser.parseFile;
-import static edu.project3.ReportGenerator.generateAdocReportCodes;
-import static edu.project3.ReportGenerator.generateAdocReportGeneral;
-import static edu.project3.ReportGenerator.generateAdocReportResources;
-import static edu.project3.ReportGenerator.generateAdocReportResourcesByDate;
-import static edu.project3.ReportGenerator.generateAdocReportResourcesByIP;
-import static edu.project3.ReportGenerator.generateMarkdownReportCodes;
-import static edu.project3.ReportGenerator.generateMarkdownReportGeneral;
-import static edu.project3.ReportGenerator.generateMarkdownReportResources;
-import static edu.project3.ReportGenerator.generateMarkdownReportResourcesByDate;
-import static edu.project3.ReportGenerator.generateMarkdownReportResourcesByIP;
+import static edu.project3.ReportGenerator.generateAdocReportCodesAndWriteToOutputFile;
+import static edu.project3.ReportGenerator.generateAdocReportGeneralAndWriteToOutputFile;
+import static edu.project3.ReportGenerator.generateAdocReportResourcesAndWriteToOutputFile;
+import static edu.project3.ReportGenerator.generateAdocReportResourcesByDateAndWriteToOutputFile;
+import static edu.project3.ReportGenerator.generateAdocReportResourcesByIPAndWriteToOutputFile;
+import static edu.project3.ReportGenerator.generateMarkdownReportCodesAndWriteToOutputFile;
+import static edu.project3.ReportGenerator.generateMarkdownReportGeneralAndWriteToOutputFile;
+import static edu.project3.ReportGenerator.generateMarkdownReportResourcesAndWriteToOutputFile;
+import static edu.project3.ReportGenerator.generateMarkdownReportResourcesByDateAndWriteToOutputFile;
+import static edu.project3.ReportGenerator.generateMarkdownReportResourcesByIPAndWriteToOutputFile;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class ReportGeneratorTest {
@@ -28,7 +28,7 @@ public class ReportGeneratorTest {
             + "java" + File.separator + "edu" + File.separator + "project3" + File.separator + "input"
             + File.separator + "logs.txt");
 
-        var act = generateMarkdownReportGeneral(logs);
+        var act = generateMarkdownReportGeneralAndWriteToOutputFile(logs);
         assertThat(act).isEqualTo(exp);
     }
 
@@ -46,7 +46,7 @@ public class ReportGeneratorTest {
             + "java" + File.separator + "edu" + File.separator + "project3" + File.separator + "input"
             + File.separator + "logs.txt");
 
-        var act = generateMarkdownReportCodes(logs);
+        var act = generateMarkdownReportCodesAndWriteToOutputFile(logs);
         assertThat(act).isEqualTo(exp);
     }
 
@@ -63,7 +63,7 @@ public class ReportGeneratorTest {
             + "java" + File.separator + "edu" + File.separator + "project3" + File.separator + "input"
             + File.separator + "logs.txt");
 
-        var act = generateMarkdownReportResources(logs);
+        var act = generateMarkdownReportResourcesAndWriteToOutputFile(logs);
         assertThat(act).isEqualTo(exp);
     }
 
@@ -79,7 +79,7 @@ public class ReportGeneratorTest {
             + "java" + File.separator + "edu" + File.separator + "project3" + File.separator + "input"
             + File.separator + "logs.txt");
 
-        var act = generateMarkdownReportResourcesByDate(logs);
+        var act = generateMarkdownReportResourcesByDateAndWriteToOutputFile(logs);
         assertThat(act).isEqualTo(exp);
     }
 
@@ -96,7 +96,7 @@ public class ReportGeneratorTest {
             + "java" + File.separator + "edu" + File.separator + "project3" + File.separator + "input"
             + File.separator + "logs.txt");
 
-        var act = generateMarkdownReportResourcesByIP(logs);
+        var act = generateMarkdownReportResourcesByIPAndWriteToOutputFile(logs);
         assertThat(act).isEqualTo(exp);
     }
 
@@ -120,7 +120,7 @@ public class ReportGeneratorTest {
             + "java" + File.separator + "edu" + File.separator + "project3" + File.separator + "input"
             + File.separator + "logs.txt");
 
-        var act = generateAdocReportGeneral(logs);
+        var act = generateAdocReportGeneralAndWriteToOutputFile(logs);
         assertThat(act).isEqualTo(exp);
     }
 
@@ -148,7 +148,7 @@ public class ReportGeneratorTest {
             + "java" + File.separator + "edu" + File.separator + "project3" + File.separator + "input"
             + File.separator + "logs.txt");
 
-        var act = generateAdocReportCodes(logs);
+        var act = generateAdocReportCodesAndWriteToOutputFile(logs);
         assertThat(act).isEqualTo(exp);
     }
 
@@ -173,7 +173,7 @@ public class ReportGeneratorTest {
             + "java" + File.separator + "edu" + File.separator + "project3" + File.separator + "input"
             + File.separator + "logs.txt");
 
-        var act = generateAdocReportResources(logs);
+        var act = generateAdocReportResourcesAndWriteToOutputFile(logs);
         assertThat(act).isEqualTo(exp);
     }
 
@@ -195,7 +195,7 @@ public class ReportGeneratorTest {
             + "java" + File.separator + "edu" + File.separator + "project3" + File.separator + "input"
             + File.separator + "logs.txt");
 
-        var act = generateAdocReportResourcesByDate(logs);
+        var act = generateAdocReportResourcesByDateAndWriteToOutputFile(logs);
         assertThat(act).isEqualTo(exp);
     }
 
@@ -220,7 +220,7 @@ public class ReportGeneratorTest {
             + "java" + File.separator + "edu" + File.separator + "project3" + File.separator + "input"
             + File.separator + "logs.txt");
 
-        var act = generateAdocReportResourcesByIP(logs);
+        var act = generateAdocReportResourcesByIPAndWriteToOutputFile(logs);
         assertThat(act).isEqualTo(exp);
     }
 }
