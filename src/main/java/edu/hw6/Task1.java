@@ -100,11 +100,12 @@ public class Task1 {
                         map.put(keyAndValue[0], keyAndValue[1]);
                     }
                 }
+                int reserveSize = this.size();
                 clear();
                 for (var k : map.keySet()) {
                     Files.writeString(path, k + ":" + map.get(k) + "\n", StandardOpenOption.APPEND);
                 }
-                size--;
+                this.size = reserveSize - 1;
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

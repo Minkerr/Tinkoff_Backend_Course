@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 import static edu.hw6.Task2.cloneFile;
-import static edu.hw6.Task2.generateCopyFilePathString;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task2Test {

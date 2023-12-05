@@ -25,10 +25,6 @@ public class Task3 {
         @Override
         boolean accept(Path t) throws IOException;
 
-        default boolean containsRegex(Path p, String s) {
-            return false;
-        }
-
         default AbstractFilter and(AbstractFilter other) {
             return (t) -> accept(t) && other.accept(t);
         }

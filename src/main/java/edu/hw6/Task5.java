@@ -24,10 +24,26 @@ public class Task5 {
 
         public static String news(long id) {
             String link = "https://hacker-news.firebaseio.com/v0/item/" + id + ".json";
+            HttpResponse<String> response = getResponse(link);
+            Pattern pattern = Pattern.compile("\"title\":\"(.*?)\",");
+            Matcher matcher = pattern.matcher(response.body());
+            if (matcher.find()) {
+                return matcher.group(1);
+            }
+            return null;
+
+        }
+
+        public static long[] hackerNewsTopStories() {
+            String link = "https://hacker-news.firebaseio.com/v0/topstories.json";
+            HttpResponse response = getResponse(link);
+            return convertToLongArray(response);
+        }
+
+        private static HttpResponse getResponse(String link) {
             HttpClient client = HttpClient.newBuilder()
                 .connectTimeout(Duration.ofSeconds(EXPECTATION_TIME))
                 .build();
-
             HttpRequest request = null;
             try {
                 request = HttpRequest.newBuilder()
@@ -45,39 +61,7 @@ public class Task5 {
             } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            Pattern pattern = Pattern.compile("\"title\":\"(.*?)\",");
-            Matcher matcher = pattern.matcher(response.body());
-            if (matcher.find()) {
-                return matcher.group(1);
-            }
-            return null;
-
-        }
-
-        public static long[] hackerNewsTopStories() {
-            HttpClient client = HttpClient.newBuilder()
-                .connectTimeout(Duration.ofSeconds(EXPECTATION_TIME))
-                .build();
-
-            HttpRequest request = null;
-            try {
-                request = HttpRequest.newBuilder()
-                    .uri(new URI("https://hacker-news.firebaseio.com/v0/topstories.json"))
-                    .GET()
-                    .timeout(Duration.of(EXPECTATION_TIME, ChronoUnit.SECONDS))
-                    .build();
-            } catch (URISyntaxException e) {
-                throw new RuntimeException(e);
-            }
-
-            HttpResponse<String> response = null;
-            try {
-                response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            } catch (IOException | InterruptedException e) {
-                return new long[0];
-            }
-
-            return convertToLongArray(response);
+            return response;
         }
 
         private static long[] convertToLongArray(HttpResponse<String> response) {

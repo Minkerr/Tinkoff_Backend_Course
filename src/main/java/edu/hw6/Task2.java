@@ -8,11 +8,6 @@ import java.nio.file.Paths;
 
 public class Task2 {
     public static void cloneFile(Path path) throws IOException {
-        Path newPath = Path.of(path.getParent() + "\\" + generateCopyFilePathString(path));
-        Files.copy(path, newPath);
-    }
-
-    public static String generateCopyFilePathString(Path path) {
         String name = String.valueOf(path.getFileName());
         String parent = String.valueOf(path.getParent());
         StringBuilder nameWithoutTxt = new StringBuilder();
@@ -25,7 +20,8 @@ public class Task2 {
                 i++;
             }
         }
-        return pathCopy.getFileName().toString();
+
+        Files.copy(path, pathCopy);
     }
 
     private Task2() {

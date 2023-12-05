@@ -55,6 +55,8 @@ public class Task1Test {
         disk.put("key1", "value1");
         disk.put("key2", "value2");
         disk.put("key3", "value3");
+        disk.remove("key2");
+        disk.put("key2", "value2");
         var act = disk.size();
         //assert
         assertThat(act).isEqualTo(exp);
