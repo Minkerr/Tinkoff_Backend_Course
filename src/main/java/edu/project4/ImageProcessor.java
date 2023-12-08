@@ -1,4 +1,6 @@
 package edu.project4;
 
-public class ImageProcessor {
+@FunctionalInterface
+public interface ImageProcessor {
+    void process(FractalImage image);
 }
