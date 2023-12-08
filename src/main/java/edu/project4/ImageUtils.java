@@ -12,10 +12,12 @@ public final class ImageUtils {
     private ImageUtils() {
     }
 
+    @SuppressWarnings("MultipleStringLiterals")
     public static void save(FractalImage image, String format) {
         BufferedImage bufferedImage = new BufferedImage(image.width(), image.height(), BufferedImage.TYPE_INT_BGR);
+        String actualFormat = format;
         if (!format.equals("jpg") && !format.equals("bmp")) {
-            format = "png"; // png is default format
+            actualFormat = "png"; // png is default format
         }
 
         for (int x = 0; x < image.width(); x++) {
@@ -36,19 +38,20 @@ public final class ImageUtils {
         }
 
         try {
-            Path path = Path.of("src" + File.separator + "main" + File.separator + "java" + File.separator +
-                "edu" + File.separator + "project4" + File.separator + "images" + File.separator + "output.bmp");
+            Path path = Path.of("src" + File.separator + "main" + File.separator + "java" + File.separator
+                + "edu" + File.separator + "project4" + File.separator + "images" + File.separator + "output."
+                + actualFormat);
 
             int fileNumber = 1;
             while (Files.exists(path)) {
-                path = Path.of("src" + File.separator + "main" + File.separator + "java" + File.separator + "edu" +
-                    File.separator + "project4" + File.separator + "images" + File.separator
-                    + "output" + fileNumber + "." + format);
+                path = Path.of("src" + File.separator + "main" + File.separator + "java" + File.separator + "edu"
+                    + File.separator + "project4" + File.separator + "images" + File.separator
+                    + "output" + fileNumber + "." + actualFormat);
                 fileNumber++;
             }
 
             File file = Files.createFile(path).toFile();
-            ImageIO.write(bufferedImage, format, file);
+            ImageIO.write(bufferedImage, actualFormat, file);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

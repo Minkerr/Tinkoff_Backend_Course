@@ -5,10 +5,6 @@ import java.util.List;
 import java.util.Random;
 
 public class SimpleRender implements Render {
-    private final double XMIN = -1.777;
-    private final double XMAX = 1.777;
-    private final double YMIN = -1;
-    private final double YMAX = 1;
 
     private int random(int min, int max) {
         Random random = new Random();
@@ -39,6 +35,7 @@ public class SimpleRender implements Render {
     }
 
     @Override
+    @SuppressWarnings("ParameterNumber")
     public FractalImage render(
         List<Transformation> variations,
         int width,
@@ -51,9 +48,13 @@ public class SimpleRender implements Render {
     ) {
         Pixel[][] data = new Pixel[width][height];
         List<TransformationCoefficientSet> coeff = generateTransformations(numberOfTransformations);
+        double yMin = -1;
+        double yMax = 1;
+        double xMin = (double) -width / height;
+        double xMax = (double) width / height;
 
         for (int num = 0; num < samples; ++num) {
-            Point pw = new Point(random(XMIN, XMAX), random(YMIN, YMAX));
+            Point pw = new Point(random(xMin, xMax), random(yMin, yMax));
 
             for (int step = 0; step < iterPerSample; ++step) {
                 int i = random(0, numberOfTransformations);
@@ -72,11 +73,11 @@ public class SimpleRender implements Render {
                         y = pwr.y();
                     }
 
-                    if (XMIN < x && x < XMAX && YMIN < y && y < YMAX) {
+                    if (xMin < x && x < xMax && yMin < y && y < yMax) {
                         //Вычисляем координаты точки, а затем задаем цвет
 
-                        int x1 = width - (int) (((XMAX - x) / (XMAX - XMIN)) * width);
-                        int y1 = height - (int) (((YMAX - y) / (YMAX - YMIN)) * height);
+                        int x1 = width - (int) (((xMax - x) / (xMax - xMin)) * width);
+                        int y1 = height - (int) (((yMax - y) / (yMax - yMin)) * height);
 
                         //Если точка попала в область изображения
                         if (y1 < height && x1 < width) {
@@ -101,7 +102,7 @@ public class SimpleRender implements Render {
             }
         }
         FractalImage fractal = new FractalImage(data, width, height);
-        if(correction){
+        if (correction) {
             GammaCorrection gammaCorrection = new GammaCorrection();
             gammaCorrection.process(fractal);
         }

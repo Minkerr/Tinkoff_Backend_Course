@@ -13,6 +13,8 @@ public class TransformationCoefficientSet {
     private int green;
     private int blue;
 
+    private final int maxColorValue = 256;
+
     public TransformationCoefficientSet() {
         this.a = random(-1.0, 1.0);
         this.d = random(-1.0, 1 - Math.sqrt(this.a * this.a));
@@ -27,9 +29,9 @@ public class TransformationCoefficientSet {
         }
         this.c = random(-1.0, 1.0);
         this.f = random(-1.0, 1.0);
-        this.red = random(0, 256);
-        this.green = random(0, 256);
-        this.blue = random(0, 256);
+        this.red = random(0, maxColorValue);
+        this.green = random(0, maxColorValue);
+        this.blue = random(0, maxColorValue);
     }
 
     public double a() {

@@ -7,6 +7,7 @@ import edu.project4.TransformationFunctions.SphereTransformation;
 import java.util.List;
 
 public class Main {
+    @SuppressWarnings("MagicNumber")
     public static void main(String[] args) {
         SimpleRender render = new SimpleRender();
         List<Transformation> variations = List.of(new HeartTransformation(), new SinusoidalTransformation(),
@@ -19,12 +20,16 @@ public class Main {
             1080,
             1000000,
             20,
-            12,
+            4,
             1,
             true
         );
 
         ImageUtils.save(fractal, "png");
+
+    }
+
+    private Main() {
 
     }
 }

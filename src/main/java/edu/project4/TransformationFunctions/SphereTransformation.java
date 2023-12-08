@@ -10,8 +10,8 @@ public class SphereTransformation implements Transformation {
         double x = point.x();
         double y = point.y();
         return new Point(
-            x / (x*x + y*y),
-            y / (x*x + y*y)
+            x / (x * x + y * y),
+            y / (x * x + y * y)
         );
     }
 }
