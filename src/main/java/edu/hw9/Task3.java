@@ -60,7 +60,7 @@ public class Task3 {
                 used[start] = 1;
                 //System.out.println("eee");
                 for (var i : list.get(start)) {
-                    if(used[i] == 0){
+                    if (used[i] == 0) {
                         executor.execute(new dfsTask(i));
                     }
                 }
