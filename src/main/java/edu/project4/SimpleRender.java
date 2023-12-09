@@ -74,22 +74,16 @@ public class SimpleRender implements Render {
                     }
 
                     if (xMin < x && x < xMax && yMin < y && y < yMax) {
-                        //Вычисляем координаты точки, а затем задаем цвет
-
                         int x1 = width - (int) (((xMax - x) / (xMax - xMin)) * width);
                         int y1 = height - (int) (((yMax - y) / (yMax - yMin)) * height);
 
-                        //Если точка попала в область изображения
                         if (y1 < height && x1 < width) {
-                            //то проверяем, первый ли раз попали в нее
                             if (data[x1][y1] == null) {
-                                //Попали в первый раз, берем стартовый цвет у соответствующего аффинного преобразования
                                 int red = coeff.get(i).red();
                                 int green = coeff.get(i).green();
                                 int blue = coeff.get(i).blue();
                                 data[x1][y1] = new Pixel(red, green, blue, 1);
                             } else {
-                                //Попали не в первый раз, считаем так:
                                 int red = (data[x1][y1].r() + coeff.get(i).red()) / 2;
                                 int green = (data[x1][y1].g() + coeff.get(i).green()) / 2;
                                 int blue = (data[x1][y1].b() + coeff.get(i).blue()) / 2;
