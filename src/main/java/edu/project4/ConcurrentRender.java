@@ -79,11 +79,11 @@ public class ConcurrentRender implements Render {
                             x = pwr.x();
                             y = pwr.y();
                         }
-                            if (xMin < x && x < xMax && yMin < y && y < yMax) {
-                                int x1 = width - (int) (((xMax - x) / (xMax - xMin)) * width);
-                                int y1 = height - (int) (((yMax - y) / (yMax - yMin)) * height);
-                                //lock.lock();
-                                synchronized (data){
+                        if (xMin < x && x < xMax && yMin < y && y < yMax) {
+                            int x1 = width - (int) (((xMax - x) / (xMax - xMin)) * width);
+                            int y1 = height - (int) (((yMax - y) / (yMax - yMin)) * height);
+                            //lock.lock();
+                            synchronized (data) {
                                 if (y1 < height && x1 < width) {
                                     if (data[x1][y1] == null) {
                                         int red = coeff.get(i).red();
