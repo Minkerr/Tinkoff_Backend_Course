@@ -22,7 +22,7 @@ public class TotalTest {
             1000000,
             20,
             32,
-            6,
+            1,
             true
         );
 
@@ -43,7 +43,7 @@ public class TotalTest {
             1000000,
             20,
             32,
-            6,
+            1,
             true
         );
 
