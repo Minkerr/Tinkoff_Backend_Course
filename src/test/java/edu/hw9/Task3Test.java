@@ -10,7 +10,7 @@ public class Task3Test {
     @Test
     void dfs_shouldWork() {
         //arrange
-        var exp = new int[]{1, 1, 1, 1, 1, 1};
+        var exp = new int[] {1, 1, 1, 1, 1, 1};
         Graph g = new Graph(6);
         g.add(0, 1);
         g.add(2, 1);
@@ -58,11 +58,6 @@ public class Task3Test {
         }
         //act
         g.dfsMultithreading(0);
-        try {
-            Thread.sleep(200);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         var act = g.getUsed();
         //assert
         assertThat(act).isEqualTo(exp);

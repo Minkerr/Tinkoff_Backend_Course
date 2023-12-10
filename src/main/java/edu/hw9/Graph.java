@@ -3,14 +3,12 @@ package edu.hw9;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.RecursiveTask;
 
 public class Graph {
     private List<List<Integer>> list;
     private volatile int[] used;
-    private ExecutorService executor;
-    private final int nThreads = 8;
 
     public Graph(int n) {
         this.list = new ArrayList<>();
@@ -19,7 +17,6 @@ public class Graph {
         }
         used = new int[n];
         Arrays.fill(used, 0);
-        executor = Executors.newWorkStealingPool(nThreads);
     }
 
     public int[] getUsed() {
@@ -41,10 +38,12 @@ public class Graph {
     }
 
     public void dfsMultithreading(int start) {
-        executor.submit(new DFSTask(start));
+        DFSTask dfsTask = new DFSTask(start);
+        ForkJoinPool forkJoinPool = new ForkJoinPool();
+        forkJoinPool.invoke(dfsTask);
     }
 
-    private class DFSTask implements Runnable {
+    private class DFSTask extends RecursiveTask<Void> {
         private int start;
 
         private DFSTask(int start) {
@@ -52,17 +51,16 @@ public class Graph {
         }
 
         @Override
-        public void run() {
-            dfs(start);
-        }
-
-        private void dfs(int start) {
+        protected Void compute() {
             used[start] = 1;
             for (var i : list.get(start)) {
                 if (used[i] == 0) {
-                    executor.execute(new DFSTask(i));
+                    DFSTask dfsTask = new DFSTask(i);
+                    dfsTask.fork();
+                    dfsTask.join();
                 }
             }
+            return null;
         }
     }
 }
