@@ -18,7 +18,7 @@ public class StatsCollector {
 
     public void push(double[] newData) {
         for (double i : newData) {
-            synchronized (stats){
+            synchronized (stats) {
                 data.add(i);
                 stats.set(0, Math.min(i, stats.get(0)));
                 stats.set(1, Math.max(i, stats.get(1)));
@@ -28,19 +28,19 @@ public class StatsCollector {
     }
 
     public double getMin() {
-        synchronized (stats){
+        synchronized (stats) {
             return stats.get(0);
         }
     }
 
     public double getMax() {
-        synchronized (stats){
+        synchronized (stats) {
             return stats.get(1);
         }
     }
 
     public double getSum() {
-        synchronized (stats){
+        synchronized (stats) {
             return stats.get(2);
         }
     }
