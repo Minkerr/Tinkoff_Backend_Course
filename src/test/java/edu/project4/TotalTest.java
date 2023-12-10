@@ -19,9 +19,9 @@ public class TotalTest {
             variations,
             1920,
             1080,
-            2000000,
-            20,
-            32,
+            300000,
+            500,
+            10,
             1,
             true
         );
@@ -40,9 +40,9 @@ public class TotalTest {
             variations,
             1920,
             1080,
-            2000000,
-            20,
-            32,
+            300000,
+            500,
+            10,
             1,
             true
         );

@@ -5,14 +5,13 @@ import java.util.List;
 import java.util.Random;
 
 public class SimpleRender implements Render {
+    private final Random random = new Random();
 
     private int random(int min, int max) {
-        Random random = new Random();
         return random.nextInt(max - min) + min;
     }
 
     private double random(double min, double max) {
-        Random random = new Random();
         return random.nextDouble(max - min) + min;
     }
 

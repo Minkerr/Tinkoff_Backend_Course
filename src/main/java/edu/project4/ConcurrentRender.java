@@ -11,15 +11,14 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Stream;
 
 public class ConcurrentRender implements Render {
-    private final int nThreads = 8;
+    private final int nThreads = 4;
+    private final Random random = new Random();
 
-    private synchronized int random(int min, int max) {
-        Random random = new Random();
+    private int random(int min, int max) {
         return random.nextInt(max - min) + min;
     }
 
-    private synchronized double random(double min, double max) {
-        Random random = new Random();
+    private double random(double min, double max) {
         return random.nextDouble(max - min) + min;
     }
 
@@ -31,7 +30,7 @@ public class ConcurrentRender implements Render {
         return coeff;
     }
 
-    public synchronized static Point rotate(Point p, double angle) {
+    public static Point rotate(Point p, double angle) {
         double x = p.x();
         double y = p.y();
         double cosAngle = Math.cos(angle);
@@ -59,9 +58,8 @@ public class ConcurrentRender implements Render {
         double yMax = 1;
         double xMin = (double) -width / height;
         double xMax = (double) width / height;
-        ExecutorService executor = Executors.newWorkStealingPool(nThreads);
+        ExecutorService executor = Executors.newFixedThreadPool(nThreads);
         CountDownLatch countDownLatch = new CountDownLatch(nThreads);
-        Lock lock = new ReentrantLock();
 
         Runnable task = () -> {
             for (int num = 0; num < samples / nThreads; ++num) {
@@ -70,40 +68,37 @@ public class ConcurrentRender implements Render {
                     int i = random(0, numberOfTransformations);
                     double x = coeff.get(i).a() * pw.x() + coeff.get(i).b() * pw.y() + coeff.get(i).c();
                     double y = coeff.get(i).d() * pw.x() + coeff.get(i).e() * pw.y() + coeff.get(i).f();
-                    double theta2 = 0.0;
+
                     Transformation variation = variations.get(random(0, variations.size()));
                     pw = variation.apply(new Point(x, y));
+
+                    double theta2 = 0.0;
                     for (int s = 0; s < symmetry; theta2 += Math.PI * 2 / symmetry, ++s) {
                         if (symmetry > 1) {
                             var pwr = rotate(pw, theta2);
                             x = pwr.x();
                             y = pwr.y();
                         }
+
                         if (xMin < x && x < xMax && yMin < y && y < yMax) {
                             int x1 = width - (int) (((xMax - x) / (xMax - xMin)) * width);
                             int y1 = height - (int) (((yMax - y) / (yMax - yMin)) * height);
-                            //lock.lock();
-                            synchronized (data) {
-                                if (y1 < height && x1 < width) {
-                                    if (data[x1][y1] == null) {
-                                        int red = coeff.get(i).red();
-                                        int green = coeff.get(i).green();
-                                        int blue = coeff.get(i).blue();
-                                        data[x1][y1] = new Pixel(red, green, blue, 1);
-                                    } else {
-                                        int red = (data[x1][y1].r() + coeff.get(i).red()) / 2;
-                                        int green = (data[x1][y1].g() + coeff.get(i).green()) / 2;
-                                        int blue = (data[x1][y1].b() + coeff.get(i).blue()) / 2;
-                                        int hits = data[x1][y1].hitCount();
-                                        data[x1][y1] = new Pixel(red, green, blue, hits + 1);
-                                    }
+
+                            if (y1 < height && x1 < width) {
+                                if (data[x1][y1] == null) {
+                                    int red = coeff.get(i).red();
+                                    int green = coeff.get(i).green();
+                                    int blue = coeff.get(i).blue();
+                                    data[x1][y1] = new Pixel(red, green, blue, 1);
+                                } else {
+                                    int red = (data[x1][y1].r() + coeff.get(i).red()) / 2;
+                                    int green = (data[x1][y1].g() + coeff.get(i).green()) / 2;
+                                    int blue = (data[x1][y1].b() + coeff.get(i).blue()) / 2;
+                                    int hits = data[x1][y1].hitCount();
+                                    data[x1][y1] = new Pixel(red, green, blue, hits + 1);
                                 }
                             }
-//                            finally {
-//                                lock.unlock();
-//                            }
                         }
-
                     }
                 }
             }
@@ -114,7 +109,7 @@ public class ConcurrentRender implements Render {
         for (var t : tasks) {
             executor.submit(t);
         }
-//            executor.invokeAll(tasks);
+
         try {
             countDownLatch.await();
         } catch (InterruptedException e) {
