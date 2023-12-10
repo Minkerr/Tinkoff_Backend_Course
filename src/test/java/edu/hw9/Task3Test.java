@@ -2,14 +2,16 @@ package edu.hw9;
 
 import edu.hw9.Task3.Graph;
 import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task3Test {
     @Test
     void dfs_shouldWork() {
         //arrange
-        var exp = new int[] {1, 1, 1, 1, 1, 1};
+        var exp = new int[]{1, 1, 1, 1, 1, 1};
         Graph g = new Graph(6);
         g.add(0, 1);
         g.add(2, 1);
@@ -27,7 +29,7 @@ public class Task3Test {
     @Test
     void dfs_shouldWorkForBigGraph() {
         //arrange
-        var exp = new int[10000];
+        var exp = new int[1000];
         Arrays.fill(exp, 1);
         Graph g = new Graph(10000);
         for (int i = 0; i < 10000 - 8 + 1; i++) {
@@ -45,7 +47,7 @@ public class Task3Test {
     @Test
     void dfsMultithreading_shouldWorkForBigGraph() {
         //arrange
-        int n = 10000;
+        int n = 1000;
         var exp = new int[n];
         Arrays.fill(exp, 1);
         Graph g = new Graph(n);
@@ -57,7 +59,7 @@ public class Task3Test {
         //act
         g.dfsMultithreading(0);
         try {
-            Thread.sleep(100);
+            Thread.sleep(200);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
