@@ -23,16 +23,6 @@ public class SimpleRender implements Render {
         return coeff;
     }
 
-    public static Point rotate(Point p, double angle) {
-        double x = p.x();
-        double y = p.y();
-        double cosAngle = Math.cos(angle);
-        double sinAngle = Math.sin(angle);
-        double newX = x * cosAngle - y * sinAngle;
-        double newY = x * sinAngle + y * cosAngle;
-        return new Point(newX, newY);
-    }
-
     @Override
     @SuppressWarnings("ParameterNumber")
     public FractalImage render(
@@ -67,7 +57,7 @@ public class SimpleRender implements Render {
 
                 for (int s = 0; s < symmetry; theta2 += Math.PI * 2 / symmetry, ++s) {
                     if (symmetry > 1) {
-                        var pwr = rotate(pw, theta2);
+                        var pwr = pw.rotate(theta2);
                         x = pwr.x();
                         y = pwr.y();
                     }

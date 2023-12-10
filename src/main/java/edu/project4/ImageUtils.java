@@ -22,9 +22,6 @@ public final class ImageUtils {
 
         for (int x = 0; x < image.width(); x++) {
             for (int y = 0; y < image.height(); y++) {
-                if (image.pixel(x, y) == null) {
-                    image.data()[x][y] = new Pixel(0, 0, 0, 0);
-                }
                 bufferedImage.setRGB(
                     x,
                     y,
