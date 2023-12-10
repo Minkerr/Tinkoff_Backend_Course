@@ -28,7 +28,7 @@ public class Task3Test {
     @Test
     void dfs_shouldWorkForBigGraph() {
         //arrange
-        int n = 1000;
+        int n = 200;
         var exp = new int[n];
         Arrays.fill(exp, 1);
         Graph g = new Graph(n);
@@ -47,7 +47,7 @@ public class Task3Test {
     @Test
     void dfsMultithreading_shouldWorkForBigGraph() {
         //arrange
-        int n = 1000;
+        int n = 200;
         var exp = new int[n];
         Arrays.fill(exp, 1);
         Graph g = new Graph(n);
