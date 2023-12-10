@@ -11,6 +11,7 @@ public class Task3 {
         private List<List<Integer>> list;
         private volatile int[] used;
         private ExecutorService executor;
+        private final int nThreads = 8;
 
         public Graph(int n) {
             this.list = new ArrayList<>();
@@ -19,7 +20,7 @@ public class Task3 {
             }
             used = new int[n];
             Arrays.fill(used, 0);
-            executor = Executors.newWorkStealingPool(8);
+            executor = Executors.newWorkStealingPool(nThreads);
         }
 
         public int[] getUsed() {
@@ -41,13 +42,13 @@ public class Task3 {
         }
 
         public void dfsMultithreading(int start) {
-            executor.submit(new dfsTask(start));
+            executor.submit(new DFSTask(start));
         }
 
-        private class dfsTask implements Runnable {
+        private class DFSTask implements Runnable {
             private int start;
 
-            public dfsTask(int start) {
+            private DFSTask(int start) {
                 this.start = start;
             }
 
@@ -60,7 +61,7 @@ public class Task3 {
                 used[start] = 1;
                 for (var i : list.get(start)) {
                     if (used[i] == 0) {
-                        executor.execute(new dfsTask(i));
+                        executor.execute(new DFSTask(i));
                     }
                 }
             }

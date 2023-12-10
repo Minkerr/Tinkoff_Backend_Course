@@ -29,10 +29,11 @@ public class Task3Test {
     @Test
     void dfs_shouldWorkForBigGraph() {
         //arrange
-        var exp = new int[1000];
+        int n = 1000;
+        var exp = new int[n];
         Arrays.fill(exp, 1);
-        Graph g = new Graph(10000);
-        for (int i = 0; i < 10000 - 8 + 1; i++) {
+        Graph g = new Graph(n);
+        for (int i = 0; i < n - 8 + 1; i++) {
             for (int j = 0; j < 8; j++) {
                 g.add(i, i + j);
             }
