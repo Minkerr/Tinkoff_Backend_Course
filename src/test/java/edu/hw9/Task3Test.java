@@ -56,14 +56,13 @@ public class Task3Test {
         }
         //act
         g.dfsMultithreading(0);
-        var act = g.getUsed();
-        //assert
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        var act = g.getUsed();
+        //assert
         assertThat(act).isEqualTo(exp);
-
     }
 }
