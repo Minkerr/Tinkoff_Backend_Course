@@ -12,70 +12,70 @@ public class Task3 {
     }
 
     static class PersonDatabase {
-        private final static Map<String, Person> phoneMap = new HashMap<>();
-        private final static Map<String, Person> addressMap = new HashMap<>();
-        private final static Map<String, Person> nameMap = new HashMap<>();
-        private final static Map<Integer, Person> idMap = new HashMap<>();
+        private final static Map<String, Person> PHONE_MAP = new HashMap<>();
+        private final static Map<String, Person> ADDRESS_MAP = new HashMap<>();
+        private final static Map<String, Person> NAME_MAP = new HashMap<>();
+        private final static Map<Integer, Person> ID_MAP = new HashMap<>();
 
         public synchronized void add(Person person) {
-            phoneMap.put(person.phoneNumber, person);
-            nameMap.put(person.name, person);
-            addressMap.put(person.address, person);
-            idMap.put(person.id, person);
+            PHONE_MAP.put(person.phoneNumber, person);
+            NAME_MAP.put(person.name, person);
+            ADDRESS_MAP.put(person.address, person);
+            ID_MAP.put(person.id, person);
         }
 
         public synchronized void delete(int id) {
-            Person person = idMap.get(id);
-            idMap.remove(person.id);
-            addressMap.remove(person.address);
-            nameMap.remove(person.name);
-            phoneMap.remove(person.phoneNumber);
+            Person person = ID_MAP.get(id);
+            ID_MAP.remove(person.id);
+            ADDRESS_MAP.remove(person.address);
+            NAME_MAP.remove(person.name);
+            PHONE_MAP.remove(person.phoneNumber);
         }
 
         public synchronized Person findByName(String name) {
-            return nameMap.get(name);
+            return NAME_MAP.get(name);
         }
 
         public synchronized Person findByAddress(String address) {
-            return addressMap.get(address);
+            return ADDRESS_MAP.get(address);
         }
 
         public synchronized Person findByPhone(String phone) {
-            return phoneMap.get(phone);
+            return PHONE_MAP.get(phone);
         }
     }
 
     static class PersonDatabaseNotSynchronized {
-        private final static Map<String, Person> phoneMap = new HashMap<>();
-        private final static Map<String, Person> addressMap = new HashMap<>();
-        private final static Map<String, Person> nameMap = new HashMap<>();
-        private final static Map<Integer, Person> idMap = new HashMap<>();
+        private final static Map<String, Person> PHONE_MAP = new HashMap<>();
+        private final static Map<String, Person> ADDRESS_MAP = new HashMap<>();
+        private final static Map<String, Person> NAME_MAP = new HashMap<>();
+        private final static Map<Integer, Person> ID_MAP = new HashMap<>();
 
         public void add(Person person) {
-            phoneMap.put(person.phoneNumber, person);
-            nameMap.put(person.name, person);
-            addressMap.put(person.address, person);
-            idMap.put(person.id, person);
+            PHONE_MAP.put(person.phoneNumber, person);
+            NAME_MAP.put(person.name, person);
+            ADDRESS_MAP.put(person.address, person);
+            ID_MAP.put(person.id, person);
         }
 
         public void delete(int id) {
-            Person person = idMap.get(id);
-            idMap.remove(person.id);
-            addressMap.remove(person.address);
-            nameMap.remove(person.name);
-            phoneMap.remove(person.phoneNumber);
+            Person person = ID_MAP.get(id);
+            ID_MAP.remove(person.id);
+            ADDRESS_MAP.remove(person.address);
+            NAME_MAP.remove(person.name);
+            PHONE_MAP.remove(person.phoneNumber);
         }
 
         public Person findByName(String name) {
-            return nameMap.get(name);
+            return NAME_MAP.get(name);
         }
 
         public Person findByAddress(String address) {
-            return addressMap.get(address);
+            return ADDRESS_MAP.get(address);
         }
 
         public Person findByPhone(String phone) {
-            return phoneMap.get(phone);
+            return PHONE_MAP.get(phone);
         }
     }
 }
