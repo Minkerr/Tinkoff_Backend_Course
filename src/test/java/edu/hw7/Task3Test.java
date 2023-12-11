@@ -47,17 +47,17 @@ public class Task3Test {
         PersonDatabase db = new PersonDatabase();
         ExecutorService executor = Executors.newFixedThreadPool(8);
         // act
-        for (int i = 0; i < 99999; i++) {
+        for (int i = 0; i < 999999; i++) {
             Person person = new Person(i, "name" + i, "address" + i, "phone" + i);
             executor.execute(() -> db.add(person));
         }
 
-        for (int i = 10000; i < 99999; i++) {
+        for (int i = 100000; i < 999999; i++) {
             int num = i;
             executor.execute(() -> db.delete(num));
         }
 
-        for (int i = 0; i < 99999; i++) {
+        for (int i = 0; i < 999999; i++) {
             String name = "name" + i;
             String address = "address" + i;
             String phone = "phone" + i;
@@ -81,7 +81,7 @@ public class Task3Test {
         PersonDatabaseNotSynchronized db = new PersonDatabaseNotSynchronized();
         ExecutorService executor = Executors.newFixedThreadPool(8);
         ReadWriteLock lock = new ReentrantReadWriteLock();
-        for (int i = 10000; i < 99999; i++) {
+        for (int i = 100000; i < 999999; i++) {
             Person person = new Person(i, "name" + i, "address" + i, "phone" + i);
             executor.execute(() -> {
                 lock.writeLock().lock();
@@ -90,7 +90,7 @@ public class Task3Test {
             });
         }
         // act
-        for (int i = 0; i < 99999; i++) {
+        for (int i = 0; i < 999999; i++) {
             String name = "name" + i;
             String address = "address" + i;
             String phone = "phone" + i;

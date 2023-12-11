@@ -18,9 +18,9 @@ public class Task1Test {
     @Test
     void parallelIncrementor_shouldAddVeryBigAndOddNumbers() {
         //arrange
-        long exp = 1000000000;
+        long exp = 1_000_000_000;
         //act
-        var act = parallelIncrementor(1, 999999999);
+        var act = parallelIncrementor(1, 999_999_999);
         //assert
         assertThat(act).isEqualTo(exp);
     }

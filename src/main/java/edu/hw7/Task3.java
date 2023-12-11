@@ -12,17 +12,10 @@ public class Task3 {
     }
 
     static class PersonDatabase {
-        PersonDatabase() {
-            phoneMap = new HashMap<>();
-            addressMap = new HashMap<>();
-            nameMap = new HashMap<>();
-            idMap = new HashMap<>();
-        }
-
-        private static Map<String, Person> phoneMap;
-        private static Map<String, Person> addressMap;
-        private static Map<String, Person> nameMap;
-        private static Map<Integer, Person> idMap;
+        private final static Map<String, Person> phoneMap = new HashMap<>();
+        private final static Map<String, Person> addressMap = new HashMap<>();
+        private final static Map<String, Person> nameMap = new HashMap<>();
+        private final static Map<Integer, Person> idMap = new HashMap<>();
 
         public synchronized void add(Person person) {
             phoneMap.put(person.phoneNumber, person);
@@ -53,17 +46,10 @@ public class Task3 {
     }
 
     static class PersonDatabaseNotSynchronized {
-        PersonDatabaseNotSynchronized() {
-            phoneMap = new HashMap<>();
-            addressMap = new HashMap<>();
-            nameMap = new HashMap<>();
-            idMap = new HashMap<>();
-        }
-
-        private static Map<String, Person> phoneMap;
-        private static Map<String, Person> addressMap;
-        private static Map<String, Person> nameMap;
-        private static Map<Integer, Person> idMap;
+        private final static Map<String, Person> phoneMap = new HashMap<>();
+        private final static Map<String, Person> addressMap = new HashMap<>();
+        private final static Map<String, Person> nameMap = new HashMap<>();
+        private final static Map<Integer, Person> idMap = new HashMap<>();
 
         public void add(Person person) {
             phoneMap.put(person.phoneNumber, person);
