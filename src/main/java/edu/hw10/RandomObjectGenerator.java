@@ -1,17 +1,11 @@
 package edu.hw10;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Executable;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Parameter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomObjectGenerator {
-    private final int GENERATING_BOUND = 100;
+    private final int generatingBound = 100;
 
     public RandomObjectGenerator() {
     }
@@ -48,15 +42,15 @@ public class RandomObjectGenerator {
     }
 
     private int generateInteger() {
-        return ThreadLocalRandom.current().nextInt(1, GENERATING_BOUND);
+        return ThreadLocalRandom.current().nextInt(1, generatingBound);
     }
 
     private double generateDouble() {
-        return ThreadLocalRandom.current().nextDouble(1, GENERATING_BOUND);
+        return ThreadLocalRandom.current().nextDouble(1, generatingBound);
     }
 
     private long generateLong() {
-        return ThreadLocalRandom.current().nextLong(1, GENERATING_BOUND);
+        return ThreadLocalRandom.current().nextLong(1, generatingBound);
     }
 
     private String generateString() {
