@@ -44,7 +44,7 @@ public class RandomObjectGenerator {
         return method.invoke(nextObject(objectClass), resultParameters);
     }
 
-    private Object[] generateParametersForNewObject(Parameter [] parameters, Class<?>[] parameterTypes){
+    private Object[] generateParametersForNewObject(Parameter[] parameters, Class<?>[] parameterTypes) {
         Object[] resultParameters = new Object[parameterTypes.length];
         for (int i = 0; i < parameterTypes.length; i++) {
             Class<?> paramClass = parameterTypes[i];
@@ -75,7 +75,6 @@ public class RandomObjectGenerator {
         }
         throw new NoSuchMethodException();
     }
-
 
     private Object generateParameter(Class<?> c, int min, int max, boolean notNull) {
         if (c.equals(String.class)) {

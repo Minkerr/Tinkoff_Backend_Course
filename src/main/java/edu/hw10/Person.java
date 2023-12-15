@@ -1,7 +1,5 @@
 package edu.hw10;
 
-import org.jetbrains.annotations.NotNull;
-
 public class Person {
     private String name;
     private int age;
