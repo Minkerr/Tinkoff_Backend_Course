@@ -34,7 +34,7 @@ public class CacheProxy {
     }
 
     public static class ObjectInvocationHandler implements InvocationHandler {
-        private Object object;
+        private final Object object;
 
         public ObjectInvocationHandler(Object object) {
             this.object = object;
