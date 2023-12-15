@@ -1,20 +1,31 @@
 package edu.hw10;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Person {
     private String name;
     private int age;
-    private String job;
+    private double doubleField;
 
-    public Person(String name, int age, String job) {
+    public Person(String name, int age, double doubleField) {
         this.name = name;
         this.age = age;
-        this.job = job;
+        this.doubleField = doubleField;
     }
 
-    @Override public String toString() {
-        return "Person{"
-            + "name='" + name + '\''
-            + ", age=" + age
-            + ", job='" + job + '\'' + '}';
+    public Person create(String name, @Min(18) int age, @Max(10) double doubleField) {
+        return new Person(name, age, doubleField);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public double getDoubleField() {
+        return doubleField;
     }
 }
