@@ -40,5 +40,6 @@ public class Task1Test {
         assertThat(obj.getClass()).isEqualTo(Person.class);
         assertThat(pers.getDoubleField()).isLessThan(10);
         assertThat(pers.getAge()).isGreaterThan(18);
+        assertThat(pers.getName()).isNotEqualTo(null);
     }
 }

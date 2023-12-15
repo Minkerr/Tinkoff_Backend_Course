@@ -11,7 +11,7 @@ public class Person {
         this.doubleField = doubleField;
     }
 
-    public Person create(String name, @Min(18) int age, @Max(10) double doubleField) {
+    public Person create(@NotNull String name, @Min(18) int age, @Max(10) double doubleField) {
         return new Person(name, age, doubleField);
     }
 
