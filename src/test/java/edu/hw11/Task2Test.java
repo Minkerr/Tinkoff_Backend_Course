@@ -1,6 +1,5 @@
 package edu.hw11;
 
-import java.io.IOException;
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.agent.ByteBuddyAgent;
 import net.bytebuddy.dynamic.loading.ClassReloadingStrategy;
