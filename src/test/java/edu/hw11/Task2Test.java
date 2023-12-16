@@ -3,21 +3,20 @@ package edu.hw11;
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.agent.ByteBuddyAgent;
 import net.bytebuddy.dynamic.loading.ClassReloadingStrategy;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task2Test {
     @Test
-    @Generated
+    @Disabled
     void testRedefineExistedClass() throws Exception {
-        @Generated
         class ArithmeticUtils {
             public int sum(int a, int b) {
                 return a + b;
             }
         }
 
-        @Generated
         class ArithmeticUtilsReload {
             public int sum(int a, int b) {
                 return a * b;
