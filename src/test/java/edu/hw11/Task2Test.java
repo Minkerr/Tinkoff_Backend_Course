@@ -9,6 +9,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task2Test {
     @Test
+    @Generated
     void testRedefineExistedClass() throws Exception {
         @Generated
         class ArithmeticUtils {
@@ -17,6 +18,7 @@ public class Task2Test {
             }
         }
 
+        @Generated
         class ArithmeticUtilsReload {
             public int sum(int a, int b) {
                 return a * b;
