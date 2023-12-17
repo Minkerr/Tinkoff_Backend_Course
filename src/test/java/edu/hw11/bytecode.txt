@@ -1,0 +1,135 @@
+
+    /*
+      // access flags 0x1
+  public fib(I)J
+    // parameter  number
+   L0
+    LINENUMBER 7 L0
+    ICONST_0
+    ISTORE 2
+   L1
+    LINENUMBER 8 L1
+    ICONST_1
+    ISTORE 3
+   L2
+    LINENUMBER 9 L2
+    ICONST_1
+    ISTORE 4
+   L3
+   FRAME APPEND [I I I]
+    ILOAD 4
+    ILOAD 1
+    IF_ICMPGE L4
+   L5
+    LINENUMBER 10 L5
+    ILOAD 3
+    ILOAD 2
+    IADD
+    ISTORE 3
+   L6
+    LINENUMBER 11 L6
+    ILOAD 3
+    ILOAD 2
+    ISUB
+    ISTORE 2
+   L7
+    LINENUMBER 9 L7
+    IINC 4 1
+    GOTO L3
+   L4
+    LINENUMBER 13 L4
+   FRAME CHOP 1
+    ILOAD 3
+    I2L
+    LRETURN
+   L8
+    LOCALVARIABLE i I L3 L4 4
+    LOCALVARIABLE this Ledu/hw11/Task3Test; L0 L8 0
+    LOCALVARIABLE number I L0 L8 1
+    LOCALVARIABLE f1 I L1 L8 2
+    LOCALVARIABLE f2 I L2 L8 3
+    MAXSTACK = 2
+    MAXLOCALS = 5
+    ======================================
+    ======================================
+
+
+
+
+
+    ======================================
+    ======================================
+      public fib(I)J
+    // parameter  number
+   L0
+    LINENUMBER 16 L0
+    ILOAD 1
+    ICONST_1
+    IF_ICMPNE L1
+   L2
+    LINENUMBER 17 L2
+    LCONST_1
+    LRETURN
+   L1
+    LINENUMBER 19 L1
+   FRAME SAME
+    ALOAD 0
+    ILOAD 1
+    ICONST_1
+    ISUB
+    INVOKEVIRTUAL edu/hw11/Task3Test.fib (I)J
+
+    ALOAD 0
+    ILOAD 1
+    ICONST_2
+    ISUB
+    INVOKEVIRTUAL edu/hw11/Task3Test.fib (I)J
+    LADD
+    LRETURN
+   L3
+    LOCALVARIABLE this Ledu/hw11/Task3Test; L0 L3 0
+    LOCALVARIABLE number I L0 L3 1
+    MAXSTACK = 5
+    MAXLOCALS = 2
+     */
+
+public fib(I)J
+    // parameter  number
+   L0
+    LINENUMBER 16 L0
+    ILOAD 1
+    IFNE L1
+   L2
+    LINENUMBER 17 L2
+    LCONST_0
+    LRETURN
+   L1
+    LINENUMBER 19 L1
+   FRAME SAME
+    ILOAD 1
+    ICONST_1
+    IF_ICMPNE L3
+   L4
+    LINENUMBER 20 L4
+    LCONST_1
+    LRETURN
+   L3
+    LINENUMBER 22 L3
+   FRAME SAME
+    ALOAD 0
+    ILOAD 1
+    ICONST_1
+    ISUB
+    INVOKEVIRTUAL edu/hw11/Task3Test.fib (I)J
+    ALOAD 0
+    ILOAD 1
+    ICONST_2
+    ISUB
+    INVOKEVIRTUAL edu/hw11/Task3Test.fib (I)J
+    LADD
+    LRETURN
+   L5
+    LOCALVARIABLE this Ledu/hw11/Task3Test; L0 L5 0
+    LOCALVARIABLE number I L0 L5 1
+    MAXSTACK = 5
+    MAXLOCALS = 2
